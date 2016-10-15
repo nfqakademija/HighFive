@@ -17,6 +17,7 @@
 /web/js
 /web/fonts
 /node_modules
-#/bin/*
+/bin/*
 /.idea/
 /nbprojects/
+/.DS_Store
