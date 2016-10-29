@@ -1,0 +1,22 @@
+services:
+#    nfq_sandbox.example:
+#        class: NFQ\SandboxBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    app.doll:
+        class: NFQ\SandboxBundle\Service\Doll
+        factory: ["@app.doll_factory", create]
+
+    app.doll_factory:
+        class: NFQ\SandboxBundle\Service\DollFactory
+        arguments: ["@event_dispatcher"]
+
+    app.event_listener:
+        class: NFQ\SandboxBundle\Event\EventListener
+        tags:
+            - { name: kernel.event_listener, event: app.pre_create, method: makeChanges }
+
+    app.event_subscriber:
+        class: NFQ\SandboxBundle\Event\EventSubscriber
+        tags:
+            - { name: kernel.event_subscriber }

@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Homepage - {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Lato:100&subset=latin-ext" rel="stylesheet" type="text/css">
+    {{ parent() }}
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-weight: 100;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .title {
+            margin: 20px auto;
+            text-align: center;
+            font-size: 96px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="title">Lėlė barbė</div>
+
+    <div class="text-left">{{ doll.head }}</div>
+    <div class="text-left">{{ doll.left_arm }}</div>
+    <div class="text-left">{{ doll.right_arm }}</div>
+    <div class="text-left">{{ doll.body }}</div>
+    <div class="text-left">{{ doll.left_leg }}</div>
+    <div class="text-left">{{ doll.right_leg }}</div>
+{% endblock %}

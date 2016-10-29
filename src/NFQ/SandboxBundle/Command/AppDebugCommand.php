@@ -1,0 +1,36 @@
+<?php
+
+namespace NFQ\SandboxBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class AppDebugCommand extends ContainerAwareCommand
+{
+    protected function configure()
+    {
+        $this
+            ->setName('app:debug')
+//            ->setDescription('...')
+//            ->addArgument('argument', InputArgument::OPTIONAL, 'Argument description')
+//            ->addOption('option', null, InputOption::VALUE_NONE, 'Option description')
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $doll = $this->getContainer()->get('app.doll');
+
+        $output->writeln($doll->getHead());
+        $output->writeln($doll->getLeftArm());
+        $output->writeln($doll->getRightArm());
+        $output->writeln($doll->getBody());
+        $output->writeln($doll->getLeftLeg());
+        $output->writeln($doll->getRightLeg());
+        $output->writeln('done.');
+    }
+
+}
