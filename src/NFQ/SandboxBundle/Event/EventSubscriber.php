@@ -16,7 +16,7 @@ class EventSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            Events::PRE_CREATE => 'onMakeChanges',
+            Events::SUB_CREATE => 'onMakeChanges',
         );
     }
 

@@ -9,7 +9,6 @@
 namespace NFQ\SandboxBundle\Service;
 
 use NFQ\SandboxBundle\Event\Events;
-use NFQ\SandboxBundle\Event\EventSubscriber;
 use NFQ\SandboxBundle\Event\PreCreateEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -30,7 +29,7 @@ class DollFactory
     }
 
     public function create() {
-        $doll = new Doll();
+        $doll = Doll::getDoll();
 
         $doll
             ->setHead('head')
@@ -40,10 +39,11 @@ class DollFactory
             ->setLeftLeg('left_leg')
             ->setRightLeg('right_leg');
 
-        $this->eventDispatcher->dispatch(Events::PRE_CREATE, new PreCreateEvent($doll));
+        // overwrite with eventListener
+        $this->eventDispatcher->dispatch(Events::LIS_CREATE, new PreCreateEvent($doll));
 
-//        $subscriber = new EventSubscriber();
-//        $this->eventDispatcher->addSubscriber($subscriber);
+        // overwrite with eventSubscriber
+        $this->eventDispatcher->dispatch(Events::SUB_CREATE, new PreCreateEvent($doll));
 
         return $doll;
     }

@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             font-weight: 100;
-            font-family: 'Lato', sans-serif;
+            font-family: sans-serif;
         }
 
         .title {
@@ -24,10 +24,10 @@
 {% block body %}
     <div class="title">Lėlė barbė</div>
 
-    <div class="text-left">{{ doll.head }}</div>
-    <div class="text-left">{{ doll.left_arm }}</div>
-    <div class="text-left">{{ doll.right_arm }}</div>
-    <div class="text-left">{{ doll.body }}</div>
-    <div class="text-left">{{ doll.left_leg }}</div>
-    <div class="text-left">{{ doll.right_leg }}</div>
+    <div class="text-left">Galva: {{ doll.head }}</div>
+    <div class="text-left">Kairė ranka: {{ doll.left_arm }}</div>
+    <div class="text-left">Dešinė ranka: {{ doll.right_arm }}</div>
+    <div class="text-left">Kūnas: {{ doll.body }}</div>
+    <div class="text-left">Kairė koja: {{ doll.left_leg }}</div>
+    <div class="text-left">Dešinė koja: {{ doll.right_leg }}</div>
 {% endblock %}

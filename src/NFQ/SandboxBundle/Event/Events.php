@@ -10,5 +10,6 @@ namespace NFQ\SandboxBundle\Event;
 
 class Events
 {
-    const PRE_CREATE = "app.pre_create";
+    const LIS_CREATE = "app.lis_create";
+    const SUB_CREATE = "app.sub_create";
 }

@@ -14,9 +14,9 @@ services:
     app.event_listener:
         class: NFQ\SandboxBundle\Event\EventListener
         tags:
-            - { name: kernel.event_listener, event: app.pre_create, method: makeChanges }
+            - { name: kernel.event_listener, event: app.lis_create, method: makeChanges }
 
     app.event_subscriber:
         class: NFQ\SandboxBundle\Event\EventSubscriber
         tags:
-            - { name: kernel.event_subscriber }
+            - { name: kernel.event_subscriber, event: app.sub_create, method: onMakeChanges }

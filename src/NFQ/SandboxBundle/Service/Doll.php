@@ -11,6 +11,12 @@ namespace NFQ\SandboxBundle\Service;
 
 class Doll
 {
+
+    /**
+     * Singleton Pattern
+     * Ensures a class has only one instance and provide a global point to retrieve it
+     */
+
     private $head;
 
     private $leftArm;
@@ -23,11 +29,22 @@ class Doll
 
     private $rightLeg;
 
-    /**
-     * Doll constructor.
-     */
-    public function __construct()
+    // Presence of a static member variable
+    private static $_doll = null;
+
+    // Prevent any outside instantiation of this class
+    private function  __construct() { }
+
+    // Prevent any object or instance of that class to be cloned
+    private function  __clone() { }
+
+    // Have a single globally accessible static method
+    public static function getDoll()
     {
+        if( !is_object(self::$_doll) )
+            self::$_doll = new Doll();
+
+        return self::$_doll;
     }
 
     /**
