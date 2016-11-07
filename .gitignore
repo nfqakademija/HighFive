@@ -16,8 +16,7 @@
 /web/css
 /web/js
 /web/fonts
+/web/images
 /node_modules
 /bin/*
-/.idea/
-/nbprojects/
-/.DS_Store
+/.idea
