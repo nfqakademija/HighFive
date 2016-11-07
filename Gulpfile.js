@@ -4,6 +4,8 @@ var gulp    = require('gulp');
 var sass    = require('gulp-sass');
 var concat  = require('gulp-concat');
 var uglify  = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
 
 var dir = {
     assets: './src/AppBundle/Resources/',
@@ -13,8 +15,11 @@ var dir = {
 
 gulp.task('sass', function() {
     gulp.src(dir.assets + 'style/main.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(autoprefixer({browsers: ['last 20 versions', 'IE 10'], flexbox: 'no-2009'}))
         .pipe(concat('style.css'))
+        .pipe(sourcemaps.write('/'))
         .pipe(gulp.dest(dir.dist + 'css'));
 });
 
@@ -25,11 +30,13 @@ gulp.task('scripts', function() {
             dir.npm + 'bootstrap-sass/assets/javascripts/bootstrap.min.js',
             dir.npm + 'fabric/dist/fabric.js',
 
-            // Main JS file
+            // Main JS files
             dir.assets + 'scripts/*.js'
         ])
+        .pipe(sourcemaps.init())
         .pipe(concat('script.js'))
         .pipe(uglify())
+        .pipe(sourcemaps.write('/'))
         .pipe(gulp.dest(dir.dist + 'js'));
 });
 
