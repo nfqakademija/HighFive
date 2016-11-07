@@ -23,9 +23,10 @@ gulp.task('scripts', function() {
             //Third party assets
             dir.npm + 'jquery/dist/jquery.min.js',
             dir.npm + 'bootstrap-sass/assets/javascripts/bootstrap.min.js',
+            dir.npm + 'fabric/dist/fabric.js',
 
             // Main JS file
-            dir.assets + 'scripts/main.js'
+            dir.assets + 'scripts/*.js'
         ])
         .pipe(concat('script.js'))
         .pipe(uglify())
@@ -48,7 +49,7 @@ gulp.task('fonts', function() {
 
 gulp.task('watch', function() {
     gulp.watch(dir.assets + 'style/main.scss', ['sass']);
-    gulp.watch(dir.assets + 'scripts/main.js', ['scripts']);
+    gulp.watch(dir.assets + 'scripts/*.js', ['scripts']);
     gulp.watch(dir.assets + 'images/**', ['images']);
 });
 
