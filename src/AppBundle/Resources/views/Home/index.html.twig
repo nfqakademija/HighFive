@@ -56,8 +56,9 @@
                         <div class="col-md-2">
                             <button class="menu-left pull-left"><span></span><span></span><span></span></button>
                         </div>
-                        <div class="col-md-8"><a href="http://rt.md/pdojo/template/home_2.html"
-                                                 class="navbar-brand"></a>
+                        <div class="col-md-8"><a href="{{ url('homepage') }}"
+                                                 class="navbar-brand"><img src="{{ asset('images/bone2.jpg') }}"
+                                                                           alt="user-photo"></a>
                             <p class="lefty">autointoxication</p><span class="bura">overreflective monotrichic</span>
                         </div>
                         <div class="col-md-2">
@@ -79,35 +80,49 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item element">
-                            <div class="zooming" data-bg="images/bone_header.jpg" style="background-image: url("{{ asset('images/slide-8.jpg') }}");"></div>
-                            <div class="carousel-caption text-capitalize">
-                                <h1><b>HighFive</b>
-                                    <br>
-                                    <span>Skeletas</span><span class="mydiv">vindicated</span> </h1>
-                                <a href="#" class="btn btn-link">Spręsti testą</a><p class="poll">detribalise</p>
-                                <span class="bura">nonglobular supraorbital</span> </div>
+                            <div class="zooming" data-bg="images/bone_header.jpg"
+                                 style="background-image: url("{{ asset('images/bone_header.jpg') }}");">
                         </div>
-                        <div class="item element active left">
-                            <div class="zooming" data-bg="images/bone_header2.jpg" style="background-image: url("{{ asset('images/slide-5.jpg') }}");"></div>
-                            <div class="carousel-caption text-capitalize">
-                                <h1><b>HighFive</b>
-                                    <br>
-                                    <span>Skeletas</span><span class="vice">zaporozhye</span> </h1>
-                                <a href="#" class="btn btn-link">Peržiūrėti testą</a><p class="classy">autointoxication</p>
-                                <span class="lefty">effigiated electively</span> </div>
-                        </div>
-                        <div class="item element next left">
-                            <div class="zooming" data-bg="images/bone_header3.jpg" style="background-image: url("{{ asset('images/slide-4.jpg') }}");"></div>
-                            <div class="carousel-caption text-capitalize">
-                                <h1><b>HighFive</b>
-                                    <br>
-                                    <span>Skeletas</span><span class="coma">sclerophylly</span> </h1>
-                                <a href="#" class="btn btn-link">Dėlioti skeletą</a><p class="kiwi">detoxicated</p>
-                                <span class="fitz">bathymetry nontheocratical</span> </div>
-                        </div>
+                        <div class="carousel-caption text-capitalize">
+                            <h1><b>HighFive</b>
+                                <br>
+                                <span>Skeletas</span><span class="mydiv">vindicated</span></h1>
+                            <a href="#" class="btn btn-link">Spręsti testą</a>
+                            <p class="poll">detribalise</p>
+                            <span class="bura">nonglobular supraorbital</span></div>
                     </div>
+                    <div class="item element active left">
+                        <div class="zooming" data-bg="images/bone_header2.jpg"
+                             style="background-image: url("{{ asset('images/bone_header2.jpg') }}");">
+                    </div>
+                    <div class="carousel-caption text-capitalize">
+                        <h1><b>HighFive</b>
+                            <br>
+                            <span>Skeletas</span><span class="vice">zaporozhye</span></h1>
+                        <a href="#" class="btn btn-link">Peržiūrėti testą</a>
+                        <p class="classy">autointoxication</p>
+                        <span class="lefty">effigiated electively</span></div>
                 </div>
+                <div class="item element next left">
+                    <div class="zooming" data-bg="images/bone_header3.jpg"
+                         style="background-image: url("{{ asset('images/bone_header3.jpg') }}");">
+                </div>
+                <div class="carousel-caption text-capitalize">
+                    <h1><b>HighFive</b>
+                        <br>
+                        <span>Skeletas</span><span class="coma">sclerophylly</span></h1>
+                    <a href="#" class="btn btn-link">Dėlioti skeletą</a>
+                    <p class="kiwi">detoxicated</p>
+                    <span class="fitz">bathymetry nontheocratical</span></div>
+                <button type="button" class="btn btn-info">Spręsti testą</button>
+                <button type="button" class="btn btn-info">Dėlioti skeletą</button>
             </div>
+            <div class="container">
+
+                </div>
+    </div>
+    </div>
+    </div>
     <!-- /.boxed slider with progress-bar -->
     </header> <!-- /.header content -->
     <!-- main page content -->
@@ -115,7 +130,7 @@
         <div class="container"> <!-- about photographer -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="description text-capitalize fullWidth"><img src="{{ asset('images/man.jpg') }}"
+                    <div class="description text-capitalize fullWidth"><img src="{{ asset('images/bone.jpg') }}"
                                                                             alt="user-photo" class="img-circle">
                         <h1><span>I'm</span><span class="kiwi">photoengrave</span> <b>Peter Joe</b>
                             <span>I Love</span><span class="vice">hagiolatry</span> <b>Photography &amp; Bikes</b>
@@ -314,11 +329,11 @@
     </main> <!-- /.main page content --> <!-- footer content -->
     <footer>
         <div class="container"> <!-- copyright -->
-            <div class="copyright"><span>© 2016. Theme by <a href="http://www.themesdojo.com/">Themes Dojo</a><p
+            <div class="copyright"><span>2016 ©. NFQ akademija</a><p
                             class="coma">reapplying</p><span
                             class="libeled">inexorable diakonikon</span></span><span
                         class="classy">truculently</span>
-                <button class="pull-right scrollUp btn-link">Go to the top of the page</button>
+                <button class="pull-right scrollUp btn-link">Į viršų</button>
             </div> <!-- /.copyright --> </div>
     </footer> <!-- /.footer content --> </div> <!-- end of magic :-) -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
