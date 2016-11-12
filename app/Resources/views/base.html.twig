@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>{% block title %}{{ "My project" }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}?v=2/>
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
+        <link rel=" stylesheet
+    " href="{{ asset('css/bootstrap.css') }}"/>
     {% endblock %}
     {% block canonical_meta %}{% endblock %}
 </head>
@@ -20,7 +21,7 @@
     {% endblock %}
 </div>
 {% block footer %}
-{% include "::inc/footer.html.twig" %}
+    {% include "::inc/footer.html.twig" %}
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/jquery.js') }}"></script>
