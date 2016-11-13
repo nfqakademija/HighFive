@@ -8,8 +8,7 @@
 
 namespace NFQ\SandboxBundle\Service;
 
-
-class Doll
+class Doll extends DollAbstract
 {
 
     /**
