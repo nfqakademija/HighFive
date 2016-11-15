@@ -399,6 +399,13 @@
     function showObjectInformation(obj) {
         log(obj.name);
         log(obj.description);
+
+        $('#popover .subtitle').html(obj.name);
+        $('#popover .desc').html(obj.description + obj.description + obj.description + obj.description);
+        var pointer = _this.canvas.getPointer(obj.e);
+
+        $('#popover').css({'left': pointer.x, 'top': pointer.y});
+        $('#popover').show();
     }
 
     function log(v) {

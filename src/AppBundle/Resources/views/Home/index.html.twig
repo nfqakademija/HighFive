@@ -2,37 +2,19 @@
 
 {% block title %}Homepage - {{ parent() }}{% endblock %}
 
-{% block stylesheets %}
-    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-    {{ parent() }}
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-weight: 100;
-            font-family: 'Lato';
-        }
-
-        .title {
-            margin: 20px auto;
-            text-align: center;
-            font-size: 96px;
-        }
-    </style>
+{% block header %}
+    {% embed ":inc:header.html.twig" %}
+        {% block carousel %}
+            {% include "AppBundle:Home:carousel.html.twig" %}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
 
 {% block body %}
-    <div class="title">NFQ Akademija</div>
+    <div class="title">info text...</div>
 
-    <canvas id="canvas" width="100%" height="500"></canvas>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-
-    <script language="javascript">
-        var bonesImagesBaseDir = "{{ asset('images/bones/') }}"
-
-        var bonesImagesFilenames = $.parseJSON('{{ images | escape('js') }}');
-    </script>
+    <div class="content">
+        <a href="{{ path('learnpage') }}">Learn</a>
+        <a href="{{ path('gamepage') }}">Game</a>
+    </div>
 {% endblock %}

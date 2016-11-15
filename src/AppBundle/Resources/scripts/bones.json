@@ -1,0 +1,212 @@
+{
+    "bones": [
+        {
+            "id": 1,
+            "name": "Skull",
+            "description": "Skull...",
+            "image": "skull.png",
+            "coordinates": {
+                "x": 2,
+                "y": 0,
+                "top": 5.853176839940545,
+                "left": 151.11988753836204,
+                "angle": 0
+            }
+        },
+        {
+            "id": 2,
+            "name": "Back",
+            "description": "Back...",
+            "image": "back.png",
+            "coordinates": {
+                "x": 2,
+                "y": 1,
+                "top": 68.42913506619695,
+                "left": 162.41880462302703,
+                "angle": 0
+            }
+        },
+        {
+            "id": 3,
+            "name": "Ribs",
+            "description": "Ribs...",
+            "image": "ribs.png",
+            "coordinates": {
+                "x": 2,
+                "y": 1,
+                "top": 86.81602164653785,
+                "left": 123.44983410147947,
+                "angle": 0
+            }
+        },
+        {
+            "id": 4,
+            "name": "Hip",
+            "description": "Hip...",
+            "image": "hip.png",
+            "coordinates": {
+                "x": 2,
+                "y": 3,
+                "top": 197.58616717803022,
+                "left": 137.8560804059387,
+                "angle": 0
+            }
+        },
+        {
+            "id": 5,
+            "name": "Left Upper Arm",
+            "description": "Left Upper Arm...",
+            "image": "left-upper-arm.png",
+            "coordinates": {
+                "x": 1,
+                "y": 1,
+                "top": 98.56292243819517,
+                "left": 112.55844220227668,
+                "angle": 0
+            }
+        },
+        {
+            "id": 6,
+            "name": "Left Lower Arm",
+            "description": "Left Lower Arm...",
+            "image": "left-lower-arm.png",
+            "coordinates": {
+                "x": 1,
+                "y": 2,
+                "top": 181.3985940194459,
+                "left": 95.57983207776236,
+                "angle": 0
+            }
+        },
+        {
+            "id": 7,
+            "name": "Left Wrist",
+            "description": "Left Wrist...",
+            "image": "left-wrist.png",
+            "coordinates": {
+                "x": 1,
+                "y": 3,
+                "top": 243.71426105333683,
+                "left": 75.97921213870933,
+                "angle": 0
+            }
+        },
+        {
+            "id": 8,
+            "name": "Right Upper Arm",
+            "description": "Right Upper Arm...",
+            "image": "right-upper-arm.png",
+            "coordinates": {
+                "x": 3,
+                "y": 1,
+                "top": 98.63506883556067,
+                "left": 217.98295968879387,
+                "angle": 0
+            }
+        },
+        {
+            "id": 9,
+            "name": "Right Lower Arm",
+            "description": "Right Lower Arm...",
+            "image": "right-lower-arm.png",
+            "coordinates": {
+                "x": 3,
+                "y": 2,
+                "top": 180.4218203112203,
+                "left": 226.40924542678368,
+                "angle": 0
+            }
+        },
+        {
+            "id": 10,
+            "name": "Right Wrist",
+            "description": "Right Wrist...",
+            "image": "right-wrist.png",
+            "coordinates": {
+                "x": 3,
+                "y": 3,
+                "top": 243.6325031744721,
+                "left": 243.0523721429284,
+                "angle": 0
+            }
+        },
+        {
+            "id": 11,
+            "name": "Left Upper Leg",
+            "description": "Left Upper Leg...",
+            "image": "left-upper-leg.png",
+            "coordinates": {
+                "x": 2,
+                "y": 3,
+                "top": 231.86843459327167,
+                "left": 130.90968270084042,
+                "angle": 0
+            }
+        },
+        {
+            "id": 12,
+            "name": "Left Lower Leg",
+            "description": "Left Lower Leg...",
+            "image": "left-lower-leg.png",
+            "coordinates": {
+                "x": 2,
+                "y": 5,
+                "top": 346.00934484023134,
+                "left": 148.76802214034416,
+                "angle": 0
+            }
+        },
+        {
+            "id": 13,
+            "name": "Left Ankle",
+            "description": "Left Ankle...",
+            "image": "left-ankle.png",
+            "coordinates": {
+                "x": 2,
+                "y": 6,
+                "top": 449.5129188173381,
+                "left": 145.97265237962733,
+                "angle": 0
+            }
+        },
+        {
+            "id": 14,
+            "name": "Right Upper Leg",
+            "description": "Right Upper Leg...",
+            "image": "right-upper-leg.png",
+            "coordinates": {
+                "x": 2,
+                "y": 3,
+                "top": 231.4253178476998,
+                "left": 179.39627365866875,
+                "angle": 0
+            }
+        },
+        {
+            "id": 15,
+            "name": "Right Lower Leg",
+            "description": "Right Lower Leg...",
+            "image": "right-lower-leg.png",
+            "coordinates": {
+                "x": 2,
+                "y": 5,
+                "top": 345.81772836194796,
+                "left": 175.06311434526435,
+                "angle": 0
+            }
+        },
+        {
+            "id": 16,
+            "name": "Right Ankle",
+            "description": "Right Ankle...",
+            "image": "right-ankle.png",
+            "coordinates": {
+                "x": 2,
+                "y": 6,
+                "top": 450.3460076479524,
+                "left": 176.75468372914878,
+                "angle": 0
+            }
+        }
+    ]
+}
