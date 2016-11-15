@@ -95,3 +95,45 @@ hwi_oauth:
 #            scope:              "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
 #            paths:
 #                email: email
+doctrine:
+    dbal:
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+
+parameters:
+    app.path.bone_images: uploads/images/bones
+
+easy_admin:
+    entities:
+        Bone:
+            class: AppBundle\Entity\Bone
+            list:
+                fields:
+                    - id
+                    - name
+                    - xcoord
+                    - ycoord
+                    - { property: 'image', type: 'image', base_path: uploads/images/bones }
+            show:
+                fields:
+                    - id
+                    - name
+                    - xcoord
+                    - ycoord
+                    - { property: 'image', type: 'image', base_path: uploads/images/bones }
+            form:
+                fields:
+                    - name
+                    - description
+                    - xcoord
+                    - ycoord
+                    - { property: 'imageFile', type: 'vich_image' }
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        bone_images:
+            uri_prefix: uploads/images/bones
+            upload_destination: uploads/images/bones
