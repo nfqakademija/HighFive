@@ -16,6 +16,7 @@
 /web/css
 /web/js
 /web/fonts
+/web/uploads/images/bones/
 /node_modules
 /bin/*
 /.idea/
