@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class BoneRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getBones()
+    {
+        $query = $this->getEntityManager()->createQueryBuilder()
+            ->select('b.id',
+                     'b.name',
+                     'b.description',
+                     'b.image',
+                     'b.xcoord',
+                     'b.ycoord')
+            ->from('AppBundle:Bone', 'b')
+            ->getQuery()
+        ;
+        return $query->getArrayResult();
+    }
 }

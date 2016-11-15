@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -75,7 +75,7 @@ doctrine:
             collate: utf8mb4_unicode_ci
 
 parameters:
-    app.path.bone_images: web/uploads/images/bones
+    app.path.bone_images: uploads/images/bones
 
 easy_admin:
     entities:
@@ -85,21 +85,27 @@ easy_admin:
                 fields:
                     - id
                     - name
-                    - { property: 'image', type: 'vich-image', base_path: uploads/images/bones }
+                    - xcoord
+                    - ycoord
+                    - { property: 'image', type: 'image', base_path: uploads/images/bones }
             show:
                 fields:
                     - id
                     - name
-                    - { property: 'image', type: 'vich-image', base_path: uploads/images/bones }
+                    - xcoord
+                    - ycoord
+                    - { property: 'image', type: 'image', base_path: uploads/images/bones }
             form:
                 fields:
                     - name
                     - description
-                    - { property: 'imageFile', type: 'vich_image',  base_path: uploads/images/bones }
+                    - xcoord
+                    - ycoord
+                    - { property: 'imageFile', type: 'vich_image' }
 
 vich_uploader:
     db_driver: orm
     mappings:
         bone_images:
             uri_prefix: uploads/images/bones
-            upload_destination: web/uploads/images/bones
+            upload_destination: uploads/images/bones

@@ -46,6 +46,20 @@ class Bone
     private $image;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $xcoord;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ycoord;
+
+    /**
      * @var File
      *
      * @Vich\UploadableField(mapping="bone_images", fileNameProperty="image")
@@ -117,6 +131,38 @@ class Bone
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getXcoord()
+    {
+        return $this->xcoord;
+    }
+
+    /**
+     * @param string $xcoord
+     */
+    public function setXcoord($xcoord)
+    {
+        $this->xcoord = $xcoord;
+    }
+
+    /**
+     * @return string
+     */
+    public function getYcoord()
+    {
+        return $this->ycoord;
+    }
+
+    /**
+     * @param string $ycoord
+     */
+    public function setYcoord($ycoord)
+    {
+        $this->ycoord = $ycoord;
     }
 
     public function setImageFile(File $image = null)
