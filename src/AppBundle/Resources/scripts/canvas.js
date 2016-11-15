@@ -40,7 +40,8 @@
                 scale: 0.2,
                 test: null
             },
-            debug: false
+            debug: false,
+            animate: false
         }
 
         // Create options by extending defaults with the passed in arguments
@@ -119,9 +120,14 @@
         _this.canvas.on({
             'object:moving': function (e) {
                 disableMovementOutsideCanvas(e);
+
+                onObjectMove(e);
             },
             'object:modified': function (e) {
                 onObjectDrop(e);
+            },
+            'mouse:down': function (e) {
+                onObjectClick(e);
             }
         });
     }
@@ -138,17 +144,17 @@
 
     function _drawCanvasRect(i, j, grid) {
         var rect = new fabric.Rect({
-            id: 'rect' + i + '-' + j,
+            gridColumnId: 'rect' + i + '-' + j,
             x: i,
             y: j,
             left: i * grid.stepSize + grid.left,
             top: j * grid.stepSize + grid.top,
             width: grid.stepSize,
             height: grid.stepSize,
-            fill: 'green',
+            fill: '#fff',
             angle: 0,
             padding: 0,
-            stroke: '#fff',
+            stroke: '#ccc',
             selectable: false,
             hoverCursor: 'default'
         });
@@ -168,8 +174,8 @@
     /**
      * @private
      */
-    function _drawCanvasObject(path, image) {
-        fabric.Image.fromURL(path + image, function (img) {
+    function _drawCanvasObject(path, obj) {
+        fabric.Image.fromURL(path + obj.image, function (img) {
             var grid = _this.options.grid;
             var imgWidth = img.width * _this.options.objects.scale;
             var imgHeight = img.height * _this.options.objects.scale;
@@ -180,7 +186,7 @@
                 angle: fabric.util.getRandomInt(0, 360),
             });
 
-            img.imageId = image;
+            img.imageId = obj.id;
             img.perPixelTargetFind = true;
             img.targetFindTolerance = 4;
             img.hasControls = img.hasBorders = true;
@@ -199,60 +205,86 @@
 
             img.disableMoving = false;
 
-            var finalPosition = _getObjectFinalPosition(image);
-            img.finalX = finalPosition.x;
-            img.finalY = finalPosition.y;
-            img.finalTop = finalPosition.top;
-            img.finalLeft = finalPosition.left;
-            img.finalAngle = finalPosition.angle;
+            img.finalX = obj.coordinates.x;
+            img.finalY = obj.coordinates.y;
+            img.finalTop = obj.coordinates.top;
+            img.finalLeft = obj.coordinates.left;
+            img.finalAngle = obj.coordinates.angle;
+
+            img.name = obj.name;
+            img.description = obj.description;
 
             img.scale(_this.options.objects.scale);
 
             _this.canvas.add(img);
 
             _this.canvas.renderAll();
+
+            if(obj.id == 1 || _this.options.animate) {
+                animateObjectInPlace(img, 2000);
+            }
         });
     }
 
-    // temporarily
-    function _getObjectFinalPosition(image) {
-        // var filename = image.split('.png');
-
-        var finalPosition = {
-            x: fabric.util.getRandomInt(0, _this.options.grid.xColumns),
-            y: fabric.util.getRandomInt(0, _this.options.grid.yColumns),
-            top: fabric.util.getRandomInt(_this.options.grid.top, _this.options.grid.height),
-            left: fabric.util.getRandomInt(_this.options.grid.left, _this.options.grid.width),
-            angle: fabric.util.getRandomInt(0, 360),
-        };
-
-        return finalPosition;
-    }
-
     function checkIfObjectInFinalPosition(obj, gridObj) {
-        if(obj.finalX == gridObj.x || obj.finalY == gridObj.y) {
+        var angleMistake = 5,
+            leftMistake = 10,
+            topMistake = 10;
+
+        if(obj.finalX == gridObj.x && obj.finalY == gridObj.y) {
+            log(gridObj.x + ' ' + gridObj.y);
+            log(obj.left + ' ' + obj.top);
             log(obj.angle);
-            if (obj.angle <= 10 || obj.angle >= 350) {
-                return true;
+
+            if (obj.angle <= angleMistake || obj.angle >= (360 - angleMistake)) {
+                if (obj.left <= (obj.finalLeft + leftMistake) && obj.left >= (obj.finalLeft - leftMistake)) {
+                    if (obj.top <= (obj.finalTop + topMistake) && obj.top >= (obj.finalTop - topMistake)) {
+                        return true;
+                    }
+                }
             }
         }
 
         return false;
     }
 
-    function animateObjectInPlace(e) {
+    function shakeObject(obj, i, max) {
+        var value = obj.left;
+        if(i % 2 == 0) {
+            value -= 10;
+        } else {
+            value += 10;
+        }
+
+        obj.animate('left', value, {
+            duration: 150,
+            onChange: _this.canvas.renderAll.bind(_this.canvas),
+            onComplete: function() {
+                if(i < max) {
+                    shakeObject(obj, ++i, max);
+                }
+            },
+            easing: fabric.util.ease['easeInQuad']
+        });
+    }
+
+    function animateObjectInPlace(e, duration) {
         _triggerObjectMovement(e);
 
-        animateObject(e, 'left', e.finalLeft);
-        animateObject(e, 'top', e.finalTop);
-        animateObject(e, 'angle', e.finalAngle);
+        if(duration == undefined) {
+            duration = 1000;
+        }
+
+        animateObject(e, 'left', e.finalLeft, duration);
+        animateObject(e, 'top', e.finalTop, duration);
+        animateObject(e, 'angle', e.finalAngle, duration);
 
         // _triggerObjectMovement(e);
     }
 
-    function animateObject(obj, position, value) {
+    function animateObject(obj, position, value, duration) {
         obj.animate(position, value, {
-            duration: 1000,
+            duration: duration,
             onChange: _this.canvas.renderAll.bind(_this.canvas),
             onComplete: function() {
                 // console.log('done');
@@ -303,24 +335,70 @@
         }
     }
 
+    function onObjectMove(e) {
+        e.target.setCoords();
+
+        var grid = _this.options.grid;
+
+        _this.canvas.forEachObject(function(obj){
+            if(obj.get('gridColumnId') != null) {
+                obj.setCoords();
+
+                if (e.target.intersectsWithObject(obj)) {
+                    obj.set('fill', 'yellow');
+
+                    // e.target.set({
+                    //     left: Math.round(e.target.left / grid.stepSize) * grid.stepSize,
+                    //     top: Math.round(e.target.top / grid.stepSize) * grid.stepSize
+                    // });
+                } else {
+                    obj.set('fill', '#fff');
+                }
+            }
+        });
+    }
+
     function onObjectDrop(e) {
         e.target.setCoords();
 
+        var inPlace = null;
+
         _this.canvas.forEachObject(function(obj){
-            if(obj.get('id') != null) {
+            if(obj.get('gridColumnId') != null) {
                 obj.setCoords();
 
                 if (e.target.intersectsWithObject(obj)) {
                     if(checkIfObjectInFinalPosition(e.target, obj)) {
-                        obj.set('fill', 'yellow');
+                        obj.set('fill', 'green');
 
                         animateObjectInPlace(e.target);
+
+                        inPlace = true;
+                    } else {
+                        obj.set('fill', '#fff');
+
+                        inPlace = (inPlace != true) ? false : inPlace;
                     }
-                } else {
-                    obj.set('fill', 'green');
                 }
             }
         });
+
+        if(inPlace == false) {
+            shakeObject(e.target, 1, 4);
+        }
+    }
+
+    function onObjectClick(e) {
+        if(e.target) {
+            if(e.target.disableMoving == true) {
+                showObjectInformation(e.target);
+            }
+        }
+    }
+
+    function showObjectInformation(obj) {
+        log(obj.name);
+        log(obj.description);
     }
 
     function log(v) {
