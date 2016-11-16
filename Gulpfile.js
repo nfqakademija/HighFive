@@ -55,7 +55,7 @@ gulp.task('fonts', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(dir.assets + 'style/main.scss', ['sass']);
+    gulp.watch(dir.assets + 'style/**', ['sass']);
     gulp.watch(dir.assets + 'scripts/*.js', ['scripts']);
     gulp.watch(dir.assets + 'images/**', ['images']);
 });

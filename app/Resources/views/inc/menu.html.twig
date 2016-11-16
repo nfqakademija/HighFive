@@ -2,35 +2,21 @@
     <div class="container">
         <div class="row">
             <div class="menu-content">
-                <div class="col-md-3 col-sm-4"><h1><span>The</span><span class="fitz">unmutated</span> <b>Menu</b></h1>
+                <div class="col-md-3 col-sm-4"><h1><span>The</span> <b>Menu</b></h1>
                 </div>
                 <div class="col-md-offset-1 col-md-2 col-sm-4">
                     <ul class="list-unstyled menu-list">
-                        <li><a href="home_1.html">Home</a>
-                            <p class="classy">nonnegligibleness</p><span
-                                    class="fitz">semimetaphorical philadelphia</span></li>
-                        <li><a href="about.html">About me</a>
-                            <p class="lehi">isohyetal</p><span class="libeled">extravagance superinfirmity</span></li>
-                        <li><a href="portfolio_4.html">Portfolio</a>
-                            <p class="mydiv">superrefined</p><span class="kiwi">saleability hyperelegance</span></li>
-                        <li><a href="store.html">Shop</a>
-                            <p class="divc">endoplasm</p><span class="mydiv">overdiscouraging preinsertion</span></li>
-                        <li><a href="blog.html">Blog</a>
-                            <p class="poll">unmutated</p><span class="mydiv">annexationism sclerophylly</span></li>
-                        <li><a href="contact.html">Contact</a>
-                            <p class="vice">underscoring</p><span class="classy">nonunanimous familiarised</span></li>
+                        <li><a href="{{ path('homepage') }}">Home</a></li>
+                        <li><a href="{{ path('learnpage') }}">Learn</a></li>
+                        <li><a href="{{ path('gamepage') }}">Test</a></li>
                     </ul>
                 </div>
                 <div class="col-md-offset-2 col-md-4 col-sm-4">
                     <ul class="list-unstyled social-links">
-                        <li><a href="#">Facebook Page</a>
-                            <p class="sown">peculiarized</p><span class="divc">anticlinorium diakonikon</span></li>
-                        <li><a href="#">Instagram</a>
-                            <p class="lefty">neronizing</p><span class="fitz">pseudopoetical bathymetry</span></li>
-                        <li><a href="#">Twitter</a>
-                            <p class="libeled">nontheocratical</p><span class="kiwi">bathymetry puritanism</span></li>
-                        <li><a href="#">YouTube Chanel</a>
-                            <p class="coma">diakonikon</p><span class="mydiv">overneutralized informatively</span></li>
+                        <li><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>
+                        <li><a href="{{ path('fos_user_profile_edit') }}">Profile Edit</a></li>
+                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                     </ul>
                 </div>
             </div>

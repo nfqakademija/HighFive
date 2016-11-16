@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}{{ "My project" }}{% endblock %}</title>
+    <title>{% block title %}{{ "SkeletOn" }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/favicon.ico')}}">
     {% block stylesheets %}
@@ -19,10 +19,12 @@
 {% block header %}
     {% include "::inc/header.html.twig" %}
 {% endblock %}
-<div class="container">
-    {% block container %}
-        {% block body %}{% endblock %}
-    {% endblock %}
+<div class="main-content">
+    <div class="container">
+        {% block container %}
+            {% block body %}{% endblock %}
+        {% endblock %}
+    </div>
 </div>
 {% block footer %}
 {% include "::inc/footer.html.twig" %}

@@ -389,23 +389,37 @@
     }
 
     function onObjectClick(e) {
-        if(e.target) {
-            if(e.target.disableMoving == true) {
-                showObjectInformation(e.target);
+        if (_this.options.animate) {
+            hidePopover();
+
+            if (e.target) {
+                if (e.target.disableMoving == true) {
+                    showObjectInformation(e.target);
+                }
             }
         }
     }
 
     function showObjectInformation(obj) {
-        log(obj.name);
-        log(obj.description);
-
-        $('#popover .subtitle').html(obj.name);
-        $('#popover .desc').html(obj.description + obj.description + obj.description + obj.description);
         var pointer = _this.canvas.getPointer(obj.e);
 
-        $('#popover').css({'left': pointer.x, 'top': pointer.y});
-        $('#popover').show();
+        showPopover(obj.name, obj.description, pointer);
+    }
+
+    function showPopover(title, desc, pointer) {
+        var $popover = $('#popover');
+
+        $popover.find('.title').html(title);
+        $popover.find('.description').html(desc);
+
+        $popover.css({'left': pointer.x, 'top': pointer.y});
+        $popover.show();
+    }
+
+    function hidePopover() {
+        var $popover = $('#popover');
+
+        $popover.hide();
     }
 
     function log(v) {

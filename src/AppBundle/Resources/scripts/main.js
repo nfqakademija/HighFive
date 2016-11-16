@@ -9,7 +9,7 @@ function loadGame(data) {
         var game = new skeletOnGame({
             canvas: {
                 id: 'canvas',
-                width: $('body > .container').width(),
+                width: $('.main-content > .container').width(),
                 height: 500
             },
             objects: {
