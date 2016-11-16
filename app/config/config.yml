@@ -102,4 +102,3 @@ vich_uploader:
         bone_images:
             uri_prefix: app.path.bone_images
             upload_destination: app.path.bone_images
-for dummies
