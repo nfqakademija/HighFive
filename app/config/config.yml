@@ -68,13 +68,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-doctrine:
-    dbal:
-        charset: utf8mb4
-        default_table_options:
-            charset: utf8mb4
-            collate: utf8mb4_unicode_ci
-
 parameters:
     app.path.bone_images: uploads/images/bones
 
@@ -88,25 +81,25 @@ easy_admin:
                     - name
                     - xcoord
                     - ycoord
-                    - { property: 'image', type: 'image', base_path: uploads/images/bones }
+                    - { property: 'image', type: 'image', base_path: app.path.bone_images }
             show:
                 fields:
                     - id
                     - name
                     - xcoord
                     - ycoord
-                    - { property: 'image', type: 'image', base_path: uploads/images/bones }
+                    - { property: 'image', type: 'image', base_path: app.path.bone_images }
             form:
                 fields:
                     - name
                     - description
                     - xcoord
                     - ycoord
-                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'imageFile', type: 'vich_image', base_path: app.path.bone_images }
 
 vich_uploader:
     db_driver: orm
     mappings:
         bone_images:
-            uri_prefix: uploads/images/bones
-            upload_destination: uploads/images/bones
+            uri_prefix: app.path.bone_images
+            upload_destination: app.path.bone_images
