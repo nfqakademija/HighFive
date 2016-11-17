@@ -17,3 +17,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            SuperSecretAcademyHashKeyDoNotTellAnyone
+    
+    facebook_app_id: 1111
+    facebook_app_secret: 1111
+    google_app_id: 1111
+    google_app_secret: 1111
