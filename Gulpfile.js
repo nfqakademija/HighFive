@@ -60,4 +60,4 @@ gulp.task('watch', function() {
     gulp.watch(dir.assets + 'images/**', ['images']);
 });
 
-gulp.task('default', ['watch', 'sass', 'scripts', 'fonts', 'images']);
+gulp.task('default', ['sass', 'scripts', 'fonts', 'images']);
