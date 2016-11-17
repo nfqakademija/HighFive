@@ -1,2 +1,13 @@
 //bootstrap
 @import "./node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// theme
+@import "vendors/theme";
+
+// layout
+@import "layout/header";
+
+// components
+@import "components/popover";
+@import "components/buttons";
+@import "components/canvas";

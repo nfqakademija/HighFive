@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {
@@ -11,9 +13,23 @@ class HomeController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:Home:index.html.twig', []);
+        // temporarily, will need separate service
+        $path = $this->get('kernel')->locateResource('@AppBundle/Resources/images/bones/');
+
+        $finder = new Finder();
+        $finder->files()->in($path);
+
+        foreach ($finder as $file) {
+            $files[] = $file->getFilename();
+        }
+
+        $data = [
+            'images' => json_encode($files)
+        ];
+
+        return $this->render('AppBundle:Home:index.html.twig', $data);
     }
 
     /**

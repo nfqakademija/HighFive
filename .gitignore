@@ -16,9 +16,10 @@
 /web/css
 /web/js
 /web/fonts
-/web/uploads/images/bones/
+/web/images
+/web/uploads/
 /node_modules
 /bin/*
-/.idea/
+/.idea
 /nbprojects/
 /.DS_Store

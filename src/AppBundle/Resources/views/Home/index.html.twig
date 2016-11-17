@@ -2,6 +2,16 @@
 
 {% block title %}Homepage - {{ parent() }}{% endblock %}
 
-{% block body %}
+{% block header %}
+    {% embed ":inc:header.html.twig" %}
+        {% block carousel %}
+            {% include "AppBundle:Home:carousel.html.twig" %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
 
+{% block body %}
+    <div class="content">
+
+    </div>
 {% endblock %}
