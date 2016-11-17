@@ -54,10 +54,18 @@ gulp.task('fonts', function() {
         .pipe(gulp.dest(dir.dist + 'fonts'));
 });
 
+gulp.task('json', function() {
+    gulp.src([
+        dir.assets + 'scripts/*.json'
+        ])
+        .pipe(gulp.dest(dir.dist + 'js'));
+});
+
 gulp.task('watch', function() {
     gulp.watch(dir.assets + 'style/**', ['sass']);
     gulp.watch(dir.assets + 'scripts/*.js', ['scripts']);
+    gulp.watch(dir.assets + 'scripts/*.json', ['json']);
     gulp.watch(dir.assets + 'images/**', ['images']);
 });
 
-gulp.task('default', ['watch', 'sass', 'scripts', 'fonts', 'images']);
+gulp.task('default', ['sass', 'scripts', 'json', 'fonts', 'images']);
