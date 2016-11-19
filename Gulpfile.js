@@ -29,6 +29,7 @@ gulp.task('scripts', function() {
             dir.npm + 'jquery/dist/jquery.min.js',
             dir.npm + 'bootstrap-sass/assets/javascripts/bootstrap.min.js',
             dir.npm + 'fabric/dist/fabric.js',
+            dir.npm + 'three/build/three.js',
 
             // Main JS files
             dir.assets + 'scripts/*.js'
