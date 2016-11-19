@@ -2,8 +2,8 @@
     "bones": [
         {
             "id": 1,
-            "name": "Skull",
-            "description": "Skull...",
+            "name": "Kaukolė",
+            "description": "Vieta kur gyvena smegenys.",
             "image": "skull.png",
             "coordinates": {
                 "x": 2,
@@ -15,8 +15,8 @@
         },
         {
             "id": 2,
-            "name": "Back",
-            "description": "Back...",
+            "name": "Stuburas",
+            "description": "Žmogaus organizmo kertinis akmuo susidedantis iš 33 kaulų.",
             "image": "back.png",
             "coordinates": {
                 "x": 2,
@@ -28,8 +28,8 @@
         },
         {
             "id": 3,
-            "name": "Ribs",
-            "description": "Ribs...",
+            "name": "Šonkauliai",
+            "description": "Saugo vidaus organus. Įdomus faktas: moterys turi dviem šonkauliais mažiau negu vyrai.",
             "image": "ribs.png",
             "coordinates": {
                 "x": 2,
@@ -41,8 +41,8 @@
         },
         {
             "id": 4,
-            "name": "Hip",
-            "description": "Hip...",
+            "name": "Dubens kaulai",
+            "description": "Vieta iš kur dygsta kojos.",
             "image": "hip.png",
             "coordinates": {
                 "x": 2,
@@ -54,8 +54,8 @@
         },
         {
             "id": 5,
-            "name": "Left Upper Arm",
-            "description": "Left Upper Arm...",
+            "name": "Žastikaulis",
+            "description": "Rankos sudedamoji dalis.",
             "image": "left-upper-arm.png",
             "coordinates": {
                 "x": 1,
