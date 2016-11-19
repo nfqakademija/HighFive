@@ -29,7 +29,14 @@ gulp.task('scripts', function() {
             dir.npm + 'jquery/dist/jquery.min.js',
             dir.npm + 'bootstrap-sass/assets/javascripts/bootstrap.min.js',
             dir.npm + 'fabric/dist/fabric.js',
+
+            // Three js Library assets
             dir.npm + 'three/build/three.js',
+            dir.npm + 'three/examples/js/Detector.js',
+            dir.npm + 'three/examples/js/loaders/DDSLoader.js',
+            dir.npm + 'three/examples/js/loaders/MTLLoader.js',
+            dir.npm + 'three/examples/js/loaders/OBJLoader.js',
+            dir.npm + 'three/examples/js/controls/OrbitControls.js',
 
             // Main JS files
             dir.assets + 'scripts/*.js'
@@ -62,11 +69,17 @@ gulp.task('json', function() {
         .pipe(gulp.dest(dir.dist + 'js'));
 });
 
+gulp.task('models', function() {
+    gulp.src([
+        dir.assets + 'models/**'
+        ])
+        .pipe(gulp.dest(dir.dist + 'models'));
+});
+
 gulp.task('watch', function() {
     gulp.watch(dir.assets + 'style/**', ['sass']);
     gulp.watch(dir.assets + 'scripts/*.js', ['scripts']);
-    gulp.watch(dir.assets + 'scripts/*.json', ['json']);
     gulp.watch(dir.assets + 'images/**', ['images']);
 });
 
-gulp.task('default', ['sass', 'scripts', 'json', 'fonts', 'images']);
+gulp.task('default', ['sass', 'scripts', 'json', 'fonts', 'images', 'models']);

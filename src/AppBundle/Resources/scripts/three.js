@@ -12,109 +12,133 @@
      * @Public
      */
     skeletOnThree.prototype.init = function() {
-        render();
+        init();
+        animate();
     }
 
-// set variables
-    var width = window.innerWidth;
-    height = window.innerHeight,
-        viewAngle = 75,
-        aspectRatio = width / height,
-        nearPlane = 0.1,
-        farPlane = 1000;
+    var container, stats;
 
-// create a scene
-    var scene = new THREE.Scene();
+    var camera, scene, renderer;
 
-// create a camera
-    var camera = new THREE.PerspectiveCamera(viewAngle, aspectRatio, nearPlane, farPlane);
+    var windowHalfX = window.innerWidth / 2;
+    var windowHalfY = window.innerHeight / 2;
 
-// create a WebGL renderer
-    var renderer = new THREE.WebGLRenderer();
+    // var loadObject = 'Heart';
+    var loadObject = 'skeleton';
 
-// start the renderer
-    renderer.setSize(width, height);
+    function init() {
 
-// attach the render-supplied DOM element
-    document.body.appendChild(renderer.domElement);
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
 
-// get cube object
-    var cube = getCube();
+        // container = document.getElementById('3D-container')
 
-// add the cube to the scene
-    scene.add(cube);
+        // set variables
+        var
+            width = window.innerWidth,
+            height = window.innerHeight,
+            // width = $('#3D-container').width(),
+            // height = $('#3D-container').height(),
+            viewAngle = 75,
+            aspectRatio = width / height,
+            nearPlane = 0.1,
+            farPlane = 1000;
 
-// get sphere object
-    var sphere = getSphere();
+        camera = new THREE.PerspectiveCamera( viewAngle, aspectRatio, nearPlane, farPlane );
+        camera.position.z = 50;
 
-// add the sphere to the scene
-    scene.add(sphere);
+        // scene
 
+        scene = new THREE.Scene();
 
-// create a point light
-    var pointLight = getPointLight();
+        var ambient = new THREE.AmbientLight( 0x444444 );
+        scene.add( ambient );
 
-// add to the scene
-    scene.add(pointLight);
+        var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+        directionalLight.position.set( 0, 0, 1 ).normalize();
+        scene.add( directionalLight );
 
-// for cube
-// camera.position.z = 5;
-// for sphere
-    camera.position.z = 300;
+        var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+        directionalLight.position.set( 0, 0, -1 ).normalize();
+        scene.add( directionalLight );
+
+        // model
+
+        var onProgress = function ( xhr ) {
+            if ( xhr.lengthComputable ) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                var percent = Math.round(percentComplete, 2);
+                console.log( percent + '% downloaded' );
+
+                if(percent == 100) {
+                    $('#preloader').hide();
+                    console.log('done');
+                }
+            }
+        };
+
+        var onError = function ( xhr ) { };
+
+        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+
+        var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setPath( 'models/' );
+        mtlLoader.load( loadObject + '.mtl', function( materials ) {
+
+            materials.preload();
+
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials( materials );
+            objLoader.setPath( 'models/' );
+            objLoader.load( loadObject + '.obj', function ( object ) {
+                // object.position.y = - 95;
+                // object.position.z = 95;
+                scene.add( object );
+
+            }, onProgress, onError );
+
+        });
+
+        // renderer
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        container.appendChild( renderer.domElement );
+
+        // controls
+
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+        controls.enableDamping = false;
+        controls.dampingFactor = 0.25;
+        controls.enableZoom = true;
+        controls.autoRotate = true;
+
+        // window.addEventListener( 'resize', onWindowResize, false );
+    }
+
+    function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+
+    function animate() {
+        requestAnimationFrame( animate );
+
+        render();
+
+        controls.update();
+    }
 
     function render() {
-        requestAnimationFrame(render);
+        // camera.lookAt( scene.position );
 
-        // cube.rotation.x += 0.1;
-        // cube.rotation.y += 0.1;
-
-        sphere.rotation.x += 0.1;
-        sphere.rotation.y += 0.1;
-
-        renderer.render(scene, camera);
-    }
-
-    function getSphere() {
-        // set up the sphere vars
-        var radius = 50,
-            segments = 16,
-            rings = 16;
-
-        // create sphere's geometry
-        var sphereGeometry = new THREE.SphereGeometry(radius, segments, rings);
-
-        // create the sphere's material
-        var sphereMaterial = new THREE.MeshLambertMaterial({color: 0xCC0000});
-
-        // create a new mesh with sphere geometry
-        var sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
-
-        return sphere;
-    }
-
-    function getCube() {
-        // create cube's geometry
-        var cubeGeometry = new THREE.BoxGeometry(1, 1, 1);
-
-        // create the cube's material
-        var cubeMaterial = new THREE.MeshBasicMaterial({color: 0x00ff00});
-
-        // create a new mesh with sphere geometry
-        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-
-        return cube;
-    }
-
-    function getPointLight() {
-        // create a point light
-        var pointLight = new THREE.PointLight(0xFFFFFF);
-
-        // set its position
-        pointLight.position.x = 10;
-        pointLight.position.y = 50;
-        pointLight.position.z = 130;
-
-        return pointLight;
+        renderer.render( scene, camera );
     }
 
 })();
