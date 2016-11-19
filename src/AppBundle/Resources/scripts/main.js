@@ -2,6 +2,12 @@ $(document).ready(function () {
     if(typeof bonesJsonDir !== 'undefined') {
         $.getJSON(bonesJsonDir, loadGame);
     }
+
+    if($('#3D-container').length) {
+        var threeD = new skeletOnThree();
+
+        threeD.init();
+    }
 });
 
 function loadGame(data) {
