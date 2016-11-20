@@ -37,6 +37,7 @@ gulp.task('scripts', function() {
             dir.npm + 'three/examples/js/loaders/MTLLoader.js',
             dir.npm + 'three/examples/js/loaders/OBJLoader.js',
             dir.npm + 'three/examples/js/controls/OrbitControls.js',
+            dir.npm + 'three/examples/js/renderers/Projector.js',
 
             // Main JS files
             dir.assets + 'scripts/*.js'
