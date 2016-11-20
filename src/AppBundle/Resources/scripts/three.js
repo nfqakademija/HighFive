@@ -20,6 +20,10 @@
 
     var camera, scene, renderer;
 
+    // custom global variables
+    var targetList = [];
+    var projector, mouse = { x: 0, y: 0 };
+
     var windowHalfX = window.innerWidth / 2;
     var windowHalfY = window.innerHeight / 2;
 
@@ -91,9 +95,20 @@
             objLoader.setMaterials( materials );
             objLoader.setPath( 'models/' );
             objLoader.load( loadObject + '.obj', function ( object ) {
+
+                object.traverse( function ( child ) {
+                    if ( child instanceof THREE.Mesh ) {
+                        //The child is the bit needed for the raycaster.intersectObject() method
+                        // console.log(child);
+                        // targetList.push(child);
+                    }
+                } );
+
                 // object.position.y = - 95;
                 // object.position.z = 95;
                 scene.add( object );
+
+                targetList.push(object);
 
             }, onProgress, onError );
 
@@ -114,7 +129,13 @@
         controls.enableZoom = true;
         controls.autoRotate = true;
 
+        // initialize object to perform world/screen calculations
+        projector = new THREE.Projector();
+
         // window.addEventListener( 'resize', onWindowResize, false );
+
+        // when the mouse moves, call the given function
+        document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     }
 
     function onWindowResize() {
@@ -139,6 +160,49 @@
         // camera.lookAt( scene.position );
 
         renderer.render( scene, camera );
+    }
+
+    function onDocumentMouseDown( event )
+    {
+        // the following line would stop any other event handler from firing
+        // (such as the mouse's TrackballControls)
+        // event.preventDefault();
+
+        console.log("Click.");
+
+        // update the mouse variable
+        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+        // find intersections
+
+        // create a Ray with origin at the mouse position
+        //   and direction into the scene (camera direction)
+        var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
+        vector.unproject( camera );
+        var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
+
+        // create an array containing all objects in the scene with which the ray intersects
+        var intersects = ray.intersectObjects( targetList, true );
+
+        // if there is one (or more) intersections
+        if ( intersects.length > 0 )
+        {
+            console.log("Hit @ " + toString( intersects[0].point ) );
+
+            for( var i = 0, length = intersects.length; i < length; i++ ) {
+                intersects[ i ].object.geometry.colorsNeedUpdate = true;
+
+                if(intersects[ i ].object.material.color != undefined) {
+                    // change the color of the closest face.
+                    intersects[i].object.material.color.setHex(Math.random() * 0xffffff);
+                }
+            }
+        }
+    }
+
+    function toString(point) {
+        return point.x + " " + point.y + " " + point.z;
     }
 
 })();
