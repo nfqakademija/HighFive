@@ -29,6 +29,7 @@
 
     // var loadObject = 'Heart';
     var loadObject = 'skeleton';
+    // var loadObject = 'skull';
 
     function init() {
 
@@ -91,6 +92,8 @@
 
             materials.preload();
 
+            // console.log(materials);
+
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials( materials );
             objLoader.setPath( 'models/' );
@@ -100,15 +103,17 @@
                     if ( child instanceof THREE.Mesh ) {
                         //The child is the bit needed for the raycaster.intersectObject() method
                         // console.log(child);
-                        // targetList.push(child);
+                        targetList.push(child);
                     }
                 } );
+
+                console.log(object);
 
                 // object.position.y = - 95;
                 // object.position.z = 95;
                 scene.add( object );
 
-                targetList.push(object);
+                // targetList.push(object);
 
             }, onProgress, onError );
 
