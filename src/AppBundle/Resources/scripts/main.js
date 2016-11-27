@@ -16,6 +16,9 @@ function loadGame(data) {
                 path: bonesImagesBaseDir,
                 images: data.bones
             },
+            game: {
+                levels: data.levels
+            },
             animate: (canvasType == 'learn') ? true : false
         });
 
