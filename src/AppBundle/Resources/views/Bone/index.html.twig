@@ -13,21 +13,20 @@
         </div>
 
         <div class="row">
-            <hr class="separator">
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <div id="ThreeJs" class="three-container half-size">
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
                 <div class="description">
-                    <h1><b>3D režimas</b></h1>
+                    <h1><b>Kaulo pavadinimas</b></h1>
                     <div class="clearfix"></div>
                     <hr>
-                    <p> 3D režime galite paspausti ant norimo kaulo, ir matyti trumpą jo aprašymą.
-                        Taip pat galite detaliai peržiūrėti kaulų struktūrą...</p>
+                    <p> Info apie kaula...</p>
                 </div>
-                <hr class="separator">
             </div>
-        </div>
-
-        <div id="ThreeJs" class="three-container">
-
         </div>
     </div>
 {% endblock %}
@@ -38,6 +37,6 @@
     <script language="javascript">
         var bonesModelsBaseDir = "{{ asset('/models/') }}";
 
-        var boneModelName = "full-skelet";
+        var boneModelName = "hip";
     </script>
 {% endblock %}

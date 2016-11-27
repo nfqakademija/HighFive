@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class BoneController extends Controller
 {
     /**
-     * @Route("/bones")
+     * @Route("/bones", name="bonespage")
      */
     public function allBones()
     {
@@ -21,5 +21,18 @@ class BoneController extends Controller
             ->getBones();
 
         return new JsonResponse(['bones' => $bones]);
+    }
+
+    /**
+     * @Route("/bone/{id}", name="bonepage", requirements={"id" = "\d+"}, defaults={"id" = 1})
+     */
+    public function getBone($id)
+    {
+        // get data from repository about bone from id
+        $data = [
+            'id' => $id
+        ];
+
+        return $this->render('AppBundle:Bone:index.html.twig', $data);
     }
 }
