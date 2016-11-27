@@ -3,8 +3,11 @@ $(document).ready(function () {
         $.getJSON(bonesJsonDir, loadGame);
     }
 
-    if($('#3D-container').length) {
-        var threeD = new skeletOnThree();
+    if($('#ThreeJs').length) {
+        var threeD = new skeletOnThreeD({
+            path: bonesModelsBaseDir,
+            model: boneModelName
+        });
 
         threeD.init();
     }

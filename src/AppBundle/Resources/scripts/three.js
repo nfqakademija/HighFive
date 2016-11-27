@@ -2,82 +2,154 @@
     var _this = this;
 
     /**
+     * @TODO: clean up the code
+     * @TODO: add comments
+     */
+
+    /**
      * @Constructor
      */
-    _this.skeletOnThree = function () {
+    _this.skeletOnThreeD = function () {
+        // Define option defaults
+        var defaults = {
+            id: 'ThreeJs',
+            path: '/models/',
+            model: 'full-skelet',
+            preloaderId: 'preloader'
+        }
 
+        // Create options by extending defaults with the passed in arguments
+        if (arguments[0] && typeof arguments[0] === "object") {
+            _this.options = extendDefaults(defaults, arguments[0]);
+        } else {
+            _this.options = defaults;
+        }
     }
+
+    /**
+     * @Private
+     * Utility method to extend defaults with user options
+     */
+    function extendDefaults(source, properties) {
+        var property;
+        for (property in properties) {
+            if (properties.hasOwnProperty(property)) {
+                if(properties[property].constructor === Object) {
+                    source[property] = extendDefaults(source[property], properties[property]);
+                } else {
+                    source[property] = properties[property];
+                }
+            }
+        }
+        return source;
+    }
+
+    // standard global variables
+    var container, scene, camera, renderer, controls, stats;
+
+    // custom global variables
+    var targetList = [];
+    var projector, mouse = { x: 0, y: 0 }, INTERSECTED;
+
+    // standard global variables
+    var width = window.innerWidth,
+        height = window.innerHeight,
+        pixelRation = window.devicePixelRatio,
+        viewAngle = 75,
+        aspectRatio = width / height,
+        near = 0.1,
+        far = 1000;
 
     /**
      * @Public
      */
-    skeletOnThree.prototype.init = function() {
+    skeletOnThreeD.prototype.init = function() {
+        updateVariables();
+
         init();
+
         animate();
     }
 
-    var container, stats;
+    /**
+     * @Private
+     */
+    function animate() {
+        requestAnimationFrame( animate );
 
-    var camera, scene, renderer;
+        render();
+    }
 
-    // custom global variables
-    var targetList = [];
-    var projector, mouse = { x: 0, y: 0 };
+    /**
+     * @Private
+     */
+    function render() {
+        // camera.lookAt( scene.position );
 
-    var windowHalfX = window.innerWidth / 2;
-    var windowHalfY = window.innerHeight / 2;
+        renderer.render( scene, camera );
 
-    // var loadObject = 'Heart';
-    var loadObject = 'skeleton';
-    // var loadObject = 'skull';
+        controls.update();
+    }
 
+    /**
+     * @Private
+     */
     function init() {
+        // SCENE
+        _initScene();
 
-        container = document.createElement( 'div' );
-        document.body.appendChild( container );
+        // CAMERA
+        _initCamera();
 
-        // container = document.getElementById('3D-container')
+        // ADD AMBIENT LIGHT
+        addToScene( getAmbientLight() );
 
-        // set variables
-        var
-            width = window.innerWidth,
-            height = window.innerHeight,
-            // width = $('#3D-container').width(),
-            // height = $('#3D-container').height(),
-            viewAngle = 75,
-            aspectRatio = width / height,
-            nearPlane = 0.1,
-            farPlane = 1000;
+        // ADD DIRECTIONAL LIGHT FRONT
+        addToScene( getDirectionalLight(0, 0, 1) );
 
-        camera = new THREE.PerspectiveCamera( viewAngle, aspectRatio, nearPlane, farPlane );
-        camera.position.z = 50;
+        // ADD DIRECTIONAL LIGHT BACK
+        addToScene( getDirectionalLight(0, 0, -1) );
 
-        // scene
+        // MODEL
+        _loadModel();
 
+        // RENDERER
+        _initRenderer();
+
+        // CONTAINER
+        _initContainer();
+
+        // CONTROLS
+        _initControls();
+
+        // PROJECTOR
+        _initProjector();
+
+        // EVENTS
+        _initEvents();
+    }
+
+    function _initScene() {
         scene = new THREE.Scene();
+    }
 
-        var ambient = new THREE.AmbientLight( 0x444444 );
-        scene.add( ambient );
+    function _initCamera() {
+        camera = new THREE.PerspectiveCamera( viewAngle, aspectRatio, near, far );
+        camera.position.z = 40;
 
-        var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-        directionalLight.position.set( 0, 0, 1 ).normalize();
-        scene.add( directionalLight );
+        camera.lookAt(scene.position);
+    }
 
-        var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-        directionalLight.position.set( 0, 0, -1 ).normalize();
-        scene.add( directionalLight );
-
-        // model
-
+    function _loadModel() {
         var onProgress = function ( xhr ) {
             if ( xhr.lengthComputable ) {
                 var percentComplete = xhr.loaded / xhr.total * 100;
                 var percent = Math.round(percentComplete, 2);
+
                 console.log( percent + '% downloaded' );
 
                 if(percent == 100) {
-                    $('#preloader').hide();
-                    console.log('done');
+                    hidePreloader();
                 }
             }
         };
@@ -87,100 +159,123 @@
         THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
         var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setPath( 'models/' );
-        mtlLoader.load( loadObject + '.mtl', function( materials ) {
+        mtlLoader.setPath( _this.options.path );
 
+        mtlLoader.load( _this.options.model + '.mtl', function( materials ) {
             materials.preload();
-
-            // console.log(materials);
 
             var objLoader = new THREE.OBJLoader();
             objLoader.setMaterials( materials );
-            objLoader.setPath( 'models/' );
-            objLoader.load( loadObject + '.obj', function ( object ) {
+            objLoader.setPath( _this.options.path );
 
+            objLoader.load( _this.options.model + '.obj', function ( object ) {
                 object.traverse( function ( child ) {
                     if ( child instanceof THREE.Mesh ) {
                         //The child is the bit needed for the raycaster.intersectObject() method
-                        // console.log(child);
                         targetList.push(child);
                     }
-                } );
+                });
 
-                console.log(object);
-
-                // object.position.y = - 95;
-                // object.position.z = 95;
-                scene.add( object );
-
-                // targetList.push(object);
+                object.position.y = 5;
+                addToScene( object );
 
             }, onProgress, onError );
-
         });
+    }
 
-        // renderer
-
-        renderer = new THREE.WebGLRenderer();
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight );
+    function _initContainer() {
+        container = document.getElementById(_this.options.id);
         container.appendChild( renderer.domElement );
+    }
 
-        // controls
+    function _initRenderer() {
+        // DETECTOR
+        if (Detector.webgl) {
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+        } else {
+            renderer = new THREE.CanvasRenderer();
+        }
 
+        // RENDERER
+        renderer.setPixelRatio( pixelRation );
+        renderer.setSize( width, height );
+    }
+
+    function _initControls() {
         controls = new THREE.OrbitControls( camera, renderer.domElement );
         controls.enableDamping = false;
         controls.dampingFactor = 0.25;
         controls.enableZoom = true;
         controls.autoRotate = true;
+    }
 
+    function _initProjector() {
         // initialize object to perform world/screen calculations
         projector = new THREE.Projector();
+    }
 
-        // window.addEventListener( 'resize', onWindowResize, false );
+    function _initEvents() {
+        // on window resize
+        window.addEventListener( 'resize', onWindowResize, false );
 
-        // when the mouse moves, call the given function
+        // on mouse click
         document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     }
 
-    function onWindowResize() {
-        windowHalfX = window.innerWidth / 2;
-        windowHalfY = window.innerHeight / 2;
+    function addToScene(param) {
+        scene.add(param);
+    }
 
-        camera.aspect = window.innerWidth / window.innerHeight;
+    function getAmbientLight() {
+        var ambient = new THREE.AmbientLight( 0x444444 );
+
+        return ambient;
+    }
+
+    function getDirectionalLight(x, y, z) {
+        var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+        directionalLight.position.set(x, y, z).normalize();
+
+        return directionalLight;
+    }
+
+    function hidePreloader() {
+        $('#' + _this.options.preloaderId).hide();
+    }
+
+    function updateVariables() {
+        var $el = $('#' + _this.options.id);
+
+        width = $el.outerWidth();
+        height = $el.outerHeight();
+        aspectRatio = width / height;
+    }
+
+    function onWindowResize() {
+        updateVariables();
+
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
 
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( width, height );
     }
 
-    function animate() {
-        requestAnimationFrame( animate );
-
-        render();
-
-        controls.update();
-    }
-
-    function render() {
-        // camera.lookAt( scene.position );
-
-        renderer.render( scene, camera );
-    }
-
-    function onDocumentMouseDown( event )
-    {
+    function onDocumentMouseDown( event ) {
         // the following line would stop any other event handler from firing
         // (such as the mouse's TrackballControls)
         // event.preventDefault();
 
-        console.log("Click.");
+        updateVariables();
 
         // update the mouse variable
         mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
         mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
         // find intersections
+        onIntersect();
+    }
 
+    function onIntersect() {
         // create a Ray with origin at the mouse position
         //   and direction into the scene (camera direction)
         var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
@@ -191,17 +286,17 @@
         var intersects = ray.intersectObjects( targetList, true );
 
         // if there is one (or more) intersections
-        if ( intersects.length > 0 )
-        {
+        if ( intersects.length > 0 ) {
             console.log("Hit @ " + toString( intersects[0].point ) );
 
-            for( var i = 0, length = intersects.length; i < length; i++ ) {
-                intersects[ i ].object.geometry.colorsNeedUpdate = true;
+            intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
+            if(intersects[ 0 ].object.material.color != undefined) {
+                // change the color of the closest face.
+                intersects[ 0 ].object.material.color.setHex(Math.random() * 0xffffff);
+            }
 
-                if(intersects[ i ].object.material.color != undefined) {
-                    // change the color of the closest face.
-                    intersects[i].object.material.color.setHex(Math.random() * 0xffffff);
-                }
+            if(intersects[ 0 ].object.name != undefined) {
+                log(intersects[ 0 ].object.name);
             }
         }
     }
@@ -210,4 +305,7 @@
         return point.x + " " + point.y + " " + point.z;
     }
 
+    function log(v) {
+        console.log(v);
+    }
 })();
