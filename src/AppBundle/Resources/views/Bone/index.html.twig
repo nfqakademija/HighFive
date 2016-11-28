@@ -37,6 +37,9 @@
     <script language="javascript">
         var bonesModelsBaseDir = "{{ asset('/models/') }}";
 
-        var boneModelName = "hip";
+        var boneId = {{ id }};
+
+        // TEMP
+        var boneJsonDir = "{{ asset('js/bones.json') }}";
     </script>
 {% endblock %}
