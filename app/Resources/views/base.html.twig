@@ -23,11 +23,11 @@
     {% endblock %}
 
     <div class="main-content">
-        <div class="container">
-            {% block container %}
+        {% block container %}
+            <div class="container">
                 {% block body %}{% endblock %}
-            {% endblock %}
-        </div>
+            </div>
+        {% endblock %}
     </div>
 
     {% block footer %}

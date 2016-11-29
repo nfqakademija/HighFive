@@ -1,0 +1,43 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}3D - {{ parent() }}{% endblock %}
+
+{% block container %}
+    <div class="container no-padding">
+        <div id="preloader">
+            <div id="preloader-ele" class="ball-scale-ripple-multiple">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <hr class="separator">
+            <div class="col-md-12">
+                <div class="description">
+                    <h1><b>3D režimas</b></h1>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <p> 3D režime galite paspausti ant norimo kaulo, ir matyti trumpą jo aprašymą.
+                        Taip pat galite detaliai peržiūrėti kaulų struktūrą...</p>
+                </div>
+                <hr class="separator">
+            </div>
+        </div>
+
+        <div id="ThreeJs" class="three-container">
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script language="javascript">
+        var bonesModelsBaseDir = "{{ asset('/models/') }}";
+
+        var boneModelName = "full-skelet";
+    </script>
+{% endblock %}
