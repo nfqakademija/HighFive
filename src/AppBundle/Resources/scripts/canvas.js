@@ -40,6 +40,9 @@
                 scale: 0.2,
                 test: null
             },
+            popover: {
+                id: "#popover"
+            },
             debug: false,
             animate: false
         }
@@ -394,20 +397,21 @@
 
             if (e.target) {
                 if (e.target.disableMoving == true) {
-                    showObjectInformation(e.target);
+                    showObjectInformation(e);
                 }
             }
         }
     }
 
-    function showObjectInformation(obj) {
-        var pointer = _this.canvas.getPointer(obj.e);
+    function showObjectInformation(e) {
+        var pointer = _this.canvas.getPointer(e.e);
+        var obj = e.target;
 
         showPopover(obj.name, obj.description, pointer);
     }
 
     function showPopover(title, desc, pointer) {
-        var $popover = $('#popover');
+        var $popover = $(_this.options.popover.id);
 
         $popover.find('.title').html(title);
         $popover.find('.description').html(desc);
@@ -417,7 +421,7 @@
     }
 
     function hidePopover() {
-        var $popover = $('#popover');
+        var $popover = $(_this.options.popover.id);
 
         $popover.hide();
     }
