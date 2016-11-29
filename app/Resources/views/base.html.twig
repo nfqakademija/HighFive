@@ -13,22 +13,27 @@
     {% block canonical_meta %}{% endblock %}
 </head>
 <body>
-{% block menu %}
-    {% include "::inc/menu.html.twig" %}
-{% endblock %}
-{% block header %}
-    {% include "::inc/header.html.twig" %}
-{% endblock %}
-<div class="main-content">
-    {% block container %}
-        <div class="container">
-            {% block body %}{% endblock %}
-        </div>
+<div id="page-content">
+    {% block menu %}
+        {% include "::inc/menu.html.twig" %}
+    {% endblock %}
+
+    {% block header %}
+        {% include "::inc/header.html.twig" %}
+    {% endblock %}
+
+    <div class="main-content">
+        {% block container %}
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+
+    {% block footer %}
+        {% include "::inc/footer.html.twig" %}
     {% endblock %}
 </div>
-{% block footer %}
-{% include "::inc/footer.html.twig" %}
-{% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/script.js') }}"></script>
 {% endblock %}

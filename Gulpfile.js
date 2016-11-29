@@ -6,6 +6,8 @@ var concat  = require('gulp-concat');
 var uglify  = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
+var imagemin = require('gulp-imagemin');
+var cache = require('gulp-cache');
 
 var dir = {
     assets: './src/AppBundle/Resources/',
@@ -49,10 +51,16 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest(dir.dist + 'js'));
 });
 
-gulp.task('images', function() {
+// Optimize Images
+gulp.task('images', function () {
     gulp.src([
-            dir.assets + 'images/**'
+            dir.assets + 'images/**/*'
         ])
+        .pipe(cache(imagemin({
+            progressive: true,
+            interlaced: true,
+            pngquant: true
+        })))
         .pipe(gulp.dest(dir.dist + 'images'));
 });
 
@@ -80,7 +88,7 @@ gulp.task('models', function() {
 gulp.task('watch', function() {
     gulp.watch(dir.assets + 'style/**', ['sass']);
     gulp.watch(dir.assets + 'scripts/*.js', ['scripts']);
-    gulp.watch(dir.assets + 'images/**', ['images']);
+    gulp.watch(dir.assets + 'images/**/*', ['images']);
 });
 
 gulp.task('default', ['sass', 'scripts', 'json', 'fonts', 'images', 'models']);

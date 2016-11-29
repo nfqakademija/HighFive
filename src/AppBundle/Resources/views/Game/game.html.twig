@@ -19,6 +19,24 @@
     <div class="canvas-container">
         <canvas id="canvas" width="100%" height="500"></canvas>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="levelModal" tabindex="-1" role="dialog" aria-labelledby="levelModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><span id="gameLevel">1</span> lygis įveiktas</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalText">kazkoks success tekstas...</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="restartGame" type="button" class="btn btn-default" data-dismiss="modal">Iš naujo</button>
+                    <button id="nextGameLevel" type="button" class="btn btn-primary" data-dismiss="modal">Sekantis Lygis</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

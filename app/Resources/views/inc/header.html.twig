@@ -5,7 +5,17 @@
             <a href="{{ path('homepage') }}" class="navbar-brand">
                 <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo"/>
             </a>
+
             <button class="menu-hamburger pull-right"><span></span><span></span><span></span></button>
+
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                <div class="logged-in-as">
+                    {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                    <a href="{{ path('fos_user_security_logout') }}" class="btn-link">
+                        <small>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</small>
+                    </a>
+                </div>
+            {% endif %}
         </div>
     </nav>
 
