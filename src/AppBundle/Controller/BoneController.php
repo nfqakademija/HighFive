@@ -22,4 +22,18 @@ class BoneController extends Controller
 
         return new JsonResponse(['bones' => $bones]);
     }
+
+    /**
+     * @Route("/bones/{id}")
+     * @param $id
+     * @return Response
+     */
+    public function showAction($id)
+    {
+        $bone = $this->getDoctrine()
+            ->getRepository('AppBundle:Bone')
+            ->getBone($id);
+
+        return $this->render('AppBundle:Bone:index.html.twig', ['bone' => $bone]);
+    }
 }

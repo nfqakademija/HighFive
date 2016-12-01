@@ -23,3 +23,6 @@
 /.idea
 /nbprojects/
 /.DS_Store
+tests/_output/*
+/tests/
+codeception.yml
