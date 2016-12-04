@@ -79,7 +79,7 @@
 
             <trans-unit id="intro_text">
                 <source>Here you can see the project "SkeletOn" which was developed by team "HighFive" during NFQ Academy. This project has three environments: learning, knowledge testing, and even 3D mode, where you can see the human skeleton from all sides, find out bone names, descriptions.</source>
-                <target>Čia matote komandos „HighFive“ NFQ akademijos metu sukurtą projektą „SkeletOn“. Šis projektas turi tris aplinkas: mokymosi, žinių išbandymo ir netgi 3D režimą, kuriame galite apžiūrėti žmogaus skeletą iš visių pusių, sužinoti atskirų dalių pavadinimus, aprašymus.</target>
+                <target>„SkeletOn“ - tai komandos „HighFive“ NFQ akademijos metu sukurtas projektas. Šis projektas turi tris aplinkas: mokymosi, žinių išbandymo ir netgi 3D režimą, kuriame galite apžiūrėti žmogaus skeletą iš visių pusių, sužinoti atskirų dalių pavadinimus bei aprašymus.</target>
             </trans-unit>
 
             <trans-unit id="discover_3d">
@@ -142,6 +142,50 @@
                 <target>Testas</target>
             </trans-unit>
 
+            <trans-unit id="more">
+                <source>More</source>
+                <target>Plačiau</target>
+            </trans-unit>
+
+            <trans-unit id="3d_mode">
+                <source>3D mode</source>
+                <target>3D režimas</target>
+            </trans-unit>
+
+            <trans-unit id="3d_mode_description">
+                <source>In the 3D mode you can rotate rotate models and when clicked on them, see short info.</source>
+                <target>3D režime galite apžiūrėti kaulus, juos vartyti, o paspaudę ant kaulo, išvysite trumpą jo aprašymą.</target>
+            </trans-unit>
+
+            <trans-unit id="skelet">
+                <source>Skelet</source>
+                <target>Skeletas</target>
+            </trans-unit>
+
+            <trans-unit id="sceletus">
+                <source>Sceletus</source>
+                <target>Sceletus</target>
+            </trans-unit>
+
+            <trans-unit id="bone_type">
+                <source>Type:</source>
+                <target>Tipas:</target>
+            </trans-unit>
+
+            <trans-unit id="bone_latin">
+                <source>Latin:</source>
+                <target>Lotyniškai:</target>
+            </trans-unit>
+
+            <trans-unit id="description">
+                <source>Description:</source>
+                <target>Aprašymas:</target>
+            </trans-unit>
+
+            <trans-unit id="skelet_description">
+                <source>Skeleton - body structural framework for carrying out the supporting and protective functions and together with the muscles forming cavities where vital organs are located.</source>
+                <target>Griaučiai, skeletas – kūno struktūrinis pagrindas, atliekantis atraminę ir apsauginę funkcijas ir kartu su raumenimis sudarantis ertmes, kuriose išsidėstę gyvybiškai svarbūs organai.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -1,16 +1,16 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}3D - {{ parent() }}{% endblock %}
+{% block title %}{% trans %}Discover 3D{% endtrans %} - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <hr class="separator">
         <div class="col-md-12">
             <div class="description">
-                <h1><b>3D režimas</b></h1>
+                <h1><b>{% trans %}3D mode{% endtrans %}</b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p> 3D režime galite peržiūrėti kaulus, juos vartaliodami... Paspauskite ant kaulo, kad pamatytumėte detalesnę informaciją.</p>
+                <p>{% trans %}In the 3D mode you can rotate rotate models and when clicked on them, see short info.{% endtrans %}</p>
             </div>
             <hr class="separator">
         </div>
@@ -31,13 +31,13 @@
 
         <div class="col-sm-6 col-md-6">
             <div class="description">
-                <h1 id="bone-title"><b>Skeletas</b></h1>
+                <h1 id="bone-title"><b>{% trans %}Skelet{% endtrans %}</b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p id="bone-latin"><b>Lotyniškai:</b> <span>Sceletus</span></p>
-                {#<p id="bone-type"><b>Tipas:</b> <span></span></p>#}
-                <p id="bone-description"><b>Aprašymas:</b> <span>Griaučiai, skeletas – kūno struktūrinis pagrindas, atliekantis atraminę ir apsauginę funkcijas ir kartu su raumenimis sudarantis ertmes, kuriose išsidėstę gyvybiškai svarbūs organai. </span></p>
-                <a id="bone-more-btn" class="btn btn-main pull-right" href="#" data-href="{{ path('bonepage') }}">Plačiau</a>
+                <p id="bone-latin"><b>{% trans %}Latin:{% endtrans %}</b> <span>{% trans %}Sceletus{% endtrans %}</span></p>
+                {#<p id="bone-type"><b>{% trans %}Type:{% endtrans %}</b> <span></span></p>#}
+                <p id="bone-description"><b>{% trans %}Description:{% endtrans %}</b> <span>{% trans %}Skeleton - body structural framework for carrying out the supporting and protective functions and together with the muscles forming cavities where vital organs are located.{% endtrans %}</span></p>
+                <a id="bone-more-btn" class="btn btn-main pull-right" href="#" data-href="{{ path('bonepage') }}">{% trans %}More{% endtrans %}</a>
             </div>
         </div>
     </div>

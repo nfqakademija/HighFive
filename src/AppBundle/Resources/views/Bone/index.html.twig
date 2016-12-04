@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}3D - {{ parent() }}{% endblock %}
+{% block title %}{% trans %}Discover 3D{% endtrans %} - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -21,9 +21,9 @@
                 <h1 id="bone-title"><b></b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p id="bone-latin"><b>Lotyniškai:</b> <span></span></p>
-                {#<p id="bone-type"><b>Tipas:</b> <span></span></p>#}
-                <p id="bone-description"><b>Aprašymas:</b> <span></span></p>
+                <p id="bone-latin"><b>{% trans %}Latin:{% endtrans %}</b> <span></span></p>
+                {#<p id="bone-type"><b>{% trans %}Type:{% endtrans %}</b> <span></span></p>#}
+                <p id="bone-description"><b>{% trans %}Description:{% endtrans %}</b> <span></span></p>
             </div>
         </div>
     </div>
