@@ -3,10 +3,15 @@
 }
 
 .three-container {
-  height: 650px;
+  position: relative;
+  height: 800px;
   width: 100%;
   margin: 0px;
   padding: 0px;
+
+  &.half-size {
+    height: 500px;
+  }
 }
 
 .no-padding {

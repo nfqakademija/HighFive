@@ -6,7 +6,7 @@
                     <h1><b>{% trans %}Menu{% endtrans %}</b></h1>
                 </div>
 
-                <div class="col-md-offset-1 col-md-2 col-sm-4">
+                <div class="col-md-offset-1 col-md-3 col-sm-4">
                     <ul class="list-unstyled menu-list">
                         <li><a href="{{ path('homepage') }}">{% trans %}Home{% endtrans %}</a></li>
                         <li><a href="{{ path('learnpage') }}">{% trans %}Learn{% endtrans %}</a></li>
@@ -15,7 +15,7 @@
                     </ul>
                 </div>
 
-                <div class="col-md-offset-2 col-md-4 col-sm-4">
+                <div class="col-md-offset-2 col-md-3 col-sm-4">
                     <ul class="list-unstyled social-links">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <li><a href="{{ path('fos_user_profile_show') }}">{% trans %}Profile{% endtrans %}</a></li>

@@ -1,0 +1,23 @@
+@media only screen and (max-width: 768px) {
+  .portfolio-intro {
+    margin: 0px;
+
+    .thumbnail {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+
+  .carousel-caption {
+    left: 20px;
+  }
+
+  .navbar {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .fullscreen-menu .menu-content {
+    padding-top: 30px;
+  }
+}

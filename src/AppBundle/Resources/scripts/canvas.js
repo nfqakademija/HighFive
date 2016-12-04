@@ -3,11 +3,6 @@
     var _game = null;
 
     /**
-     * @TODO: clean up the code
-     * @TODO: add comments
-     */
-
-    /**
      * @Constructor
      */
     _this.skeletOnGame = function() {
@@ -46,10 +41,10 @@
                 level: 1
             },
             modal: {
-                modalId: "levelModal",
-                levelId: "gameLevel",
-                restartButtonId: "restartGame",
-                nextLevelButtonId: "nextGameLevel"
+                modalId: "#levelModal",
+                levelId: "#gameLevel",
+                restartButtonId: "#restartGame",
+                nextLevelButtonId: "#nextGameLevel"
             },
             debug: true,
             animate: false
@@ -97,13 +92,6 @@
     }
 
     /**
-     * @Public
-     */
-    // skeletOnGame.prototype.reinit = function() {
-    //     reinit.call(_this);
-    // }
-
-    /**
      * @Private
      */
     function reinit(reset) {
@@ -133,13 +121,15 @@
      * @Private
      */
     function initializeEvents() {
-        $('#' + _this.options.modal.nextLevelButtonId).on('click', function() {
+        $(_this.options.modal.nextLevelButtonId).on('click', function() {
             hideModal();
+            _cleanGrid();
             reinit(false);
         });
 
-        $('#' + _this.options.modal.restartButtonId).on('click', function() {
+        $(_this.options.modal.restartButtonId).on('click', function() {
             hideModal();
+            _cleanGrid();
             reinit(true);
         });
     }
@@ -197,7 +187,7 @@
             fill: '#fff',
             angle: 0,
             padding: 0,
-            stroke: '#ccc',
+            stroke: '#fff',
             selectable: false,
             hoverCursor: 'default'
         });
@@ -205,18 +195,12 @@
         return rect;
     }
 
-    /**
-     * @private
-     */
     function drawCanvasObjects() {
         for (var i = 0, len = _this.options.objects.images.length; i < len; i++) {
             _drawCanvasObject(_this.options.objects.path, _this.options.objects.images[i]);
         }
     }
 
-    /**
-     * @private
-     */
     function _drawCanvasObject(path, obj) {
         fabric.Image.fromURL(path + obj.image, function (img) {
             var grid = _this.options.grid;
@@ -455,14 +439,17 @@
         var pointer = _this.canvas.getPointer(e.e);
         var obj = e.target;
 
-        showPopover(obj.name, obj.description, pointer);
+        showPopover(obj.imageId, obj.name, obj.description, pointer);
     }
 
-    function showPopover(title, desc, pointer) {
+    function showPopover(id, title, desc, pointer) {
         var $popover = $(_this.options.popover.id);
+        var $btn = $popover.find('.btn-more');
+        var link = $btn.attr('data-href') + '/' + id;
 
         $popover.find('.title').html(title);
         $popover.find('.description').html(desc);
+        $btn.attr('href', link);
 
         $popover.css({'left': pointer.x, 'top': pointer.y});
         $popover.show();
@@ -555,6 +542,14 @@
         _game.currentLevel = _game.levels[_game.level - 1];
     }
 
+    function _cleanGrid() {
+        _this.canvas.forEachObject(function(obj){
+            if(obj.get('gridColumnId') != null) {
+                obj.set('fill', '#fff');
+            }
+        });
+    }
+
 
     /** ========== Modal ========== **/
 
@@ -562,24 +557,24 @@
     function showModal(level, completed) {
         if(completed) {
             // completed
-            $('#' + _this.options.modal.restartButtonId).show();
-            $('#' + _this.options.modal.nextLevelButtonId).hide();
+            $(_this.options.modal.restartButtonId).show();
+            $(_this.options.modal.nextLevelButtonId).hide();
         } else {
             // next level
-            $('#' + _this.options.modal.restartButtonId).hide();
-            $('#' + _this.options.modal.nextLevelButtonId).show();
+            $(_this.options.modal.restartButtonId).hide();
+            $(_this.options.modal.nextLevelButtonId).show();
         }
 
-        $('#' + _this.options.modal.levelId).text((level));
+        $(_this.options.modal.levelId).text((level));
 
-        $('#' + _this.options.modal.modalId).modal({
+        $(_this.options.modal.modalId).modal({
             keyboard: false,
             backdrop: 'static'
         });
     }
 
     function hideModal() {
-        // $('#' + _this.options.modal.modalId).modal('hide');
+        // $(_this.options.modal.modalId).modal('hide');
     }
 
     function log(v) {
