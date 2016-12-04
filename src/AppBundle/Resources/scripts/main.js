@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    /**
+     * global: boneJsonDir
+     * global: bonesImagesBaseDir
+     * global: bonesModelsBaseDir
+     * global: boneModelName
+     * global: boneId
+     * */
+
     if(typeof bonesJsonDir !== 'undefined' && typeof bonesImagesBaseDir !== 'undefined') {
         $.getJSON(bonesJsonDir, loadGame);
     }
