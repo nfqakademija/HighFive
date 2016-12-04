@@ -27,7 +27,8 @@ function loadGame(data) {
             game: {
                 levels: data.levels
             },
-            animate: (canvasType == 'learn') ? true : false
+            animate: (canvasType == 'learn') ? true : false,
+            debug: false
         });
 
         game.init();
