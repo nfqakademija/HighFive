@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="bone_name">
+                <source>Bone name</source>
+                <target>Kaulo pavadinimas</target>
+            </trans-unit>
+
+            <trans-unit id="bone_description">
+                <source>Bone description</source>
+                <target>Info apie kaula...</target>
+            </trans-unit>
+
+            <trans-unit id="game_mode">
+                <source>Game mode</source>
+                <target>Žaidimo režimas</target>
+            </trans-unit>
+
+            <trans-unit id="game_mode_description">
+                <source>In the game mode you can arrange the bones in their respective places.</source>
+                <target>Žaidimo režime galite sudėlioti kaulus į jų atitinkamas vietas.</target>
+            </trans-unit>
+
+            <trans-unit id="level_completed">
+                <source>level is completed</source>
+                <target>lygis įveiktas</target>
+            </trans-unit>
+
+            <trans-unit id="success_message">
+                <source>You've assembled successfully skeleton.</source>
+                <target>Jūs sėkmingai sudėjote skeletą.</target>
+            </trans-unit>
+
+            <trans-unit id="restart">
+                <source>Restart</source>
+                <target>Iš naujo</target>
+            </trans-unit>
+
+            <trans-unit id="next_level">
+                <source>Next level</source>
+                <target>Kitas lygis</target>
+            </trans-unit>
+
+            <trans-unit id="learn_mode">
+                <source>Learning mode</source>
+                <target>Mokymosi režimas</target>
+            </trans-unit>
+
+            <trans-unit id="learn_mode_description">
+                <source>In the learning mode you can click on the desired bone and see a brief description.</source>
+                <target>Mokymosi režime galite paspausti ant norimo kaulo, ir matyti trumpą jo aprašymą.</target>
+            </trans-unit>
+
+            <trans-unit id="game">
+                <source>Game</source>
+                <target>Žaidimas</target>
+            </trans-unit>
+
+            <trans-unit id="skeletOn_adjectives">
+                <source>Simple &amp; fun</source>
+                <target>Paprastas ir linksmas</target>
+            </trans-unit>
+
+            <trans-unit id="learn">
+                <source>Learn</source>
+                <target>Mokytis</target>
+            </trans-unit>
+
+            <trans-unit id="test_knowledge">
+                <source>Test Your Knowledge</source>
+                <target>Išbandyti savo žinias</target>
+            </trans-unit>
+
+            <trans-unit id="intro">
+                <source>Introduction</source>
+                <target>Įžanga</target>
+            </trans-unit>
+
+            <trans-unit id="intro_text">
+                <source>Here you can see the project "SkeletOn" which was developed by team "HighFive" during NFQ Academy. This project has three environments: learning, knowledge testing, and even 3D mode, where you can see the human skeleton from all sides, find out bone names, descriptions.</source>
+                <target>Čia matote komandos „HighFive“ NFQ akademijos metu sukurtą projektą „SkeletOn“. Šis projektas turi tris aplinkas: mokymosi, žinių išbandymo ir netgi 3D režimą, kuriame galite apžiūrėti žmogaus skeletą iš visių pusių, sužinoti atskirų dalių pavadinimus, aprašymus.</target>
+            </trans-unit>
+
+            <trans-unit id="discover_3d">
+                <source>Discover 3D</source>
+                <target>Atrasti 3D pasaulį</target>
+            </trans-unit>
+
+            <trans-unit id="rights_reserved">
+                <source>All rights reserved</source>
+                <target>Visos teisės saugomos</target>
+            </trans-unit>
+
+            <trans-unit id="to_top">
+                <source>Go to the top of the page</source>
+                <target>Eiti į puslapio viršų</target>
+            </trans-unit>
+
+            <trans-unit id="menu">
+                <source>Menu</source>
+                <target>Meniu</target>
+            </trans-unit>
+
+            <trans-unit id="home">
+                <source>Home</source>
+                <target>Pradinis puslapis</target>
+            </trans-unit>
+
+            <trans-unit id="profile">
+                <source>Profile</source>
+                <target>Profilis</target>
+            </trans-unit>
+
+            <trans-unit id="profile_edit">
+                <source>Profile Edit</source>
+                <target>Redaguoti profilį</target>
+            </trans-unit>
+
+            <trans-unit id="change_password">
+                <source>Change Password</source>
+                <target>Keist slaptažodį</target>
+            </trans-unit>
+
+            <trans-unit id="logout">
+                <source>Logout</source>
+                <target>Atsjungti</target>
+            </trans-unit>
+
+            <trans-unit id="login">
+                <source>Login</source>
+                <target>Prisijungti</target>
+            </trans-unit>
+
+            <trans-unit id="register">
+                <source>Register</source>
+                <target>Registruotis</target>
+            </trans-unit>
+
+            <trans-unit id="test">
+                <source>Test</source>
+                <target>Testas</target>
+            </trans-unit>
+
+        </body>
+    </file>
+</xliff>
