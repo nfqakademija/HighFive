@@ -59,5 +59,4 @@ class User extends BaseUser
     {
         $this->facebookID = $facebookID;
     }
-
 }
