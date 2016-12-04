@@ -1,4 +1,5 @@
 [![Build Status](https://scrutinizer-ci.com/g/nfqakademija/HighFive/badges/build.png?b=master)](https://scrutinizer-ci.com/g/nfqakademija/HighFive/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/nfqakademija/HighFive/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/nfqakademija/HighFive/?branch=master)
 
 ![](https://avatars0.githubusercontent.com/u/4995607?v=3&s=100)
 
