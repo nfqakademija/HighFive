@@ -10,7 +10,15 @@
             id: 'ThreeJs',
             path: '/models/',
             model: 'full-skelet',
-            preloaderId: 'preloader',
+            containers: {
+                preloaderId: '#preloader',
+                boneTitleId: '#bone-title > b',
+                boneLatinId: '#bone-latin > span',
+                boneDescId: '#bone-description > span',
+                boneMoreBtnId: '#bone-more-btn'
+            },
+            bones: null,
+            disableClickEvents: false,
             debug: true
         }
 
@@ -63,6 +71,10 @@
      */
     skeletOnThreeD.prototype.init = function() {
         updateVariables();
+
+        if(_this.options.disableClickEvents) {
+            showBoneInfo(_this.options.model);
+        }
 
         init();
 
@@ -229,8 +241,10 @@
         // on window resize
         window.addEventListener( 'resize', onWindowResize, false );
 
-        // on mouse click
-        document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+        if(!_this.options.disableClickEvents) {
+            // on mouse click
+            document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+        }
     }
 
     // RANDOM FUNCTIONS
@@ -253,7 +267,7 @@
     }
 
     function hidePreloader() {
-        $('#' + _this.options.preloaderId).hide();
+        $(_this.options.containers.preloaderId).hide();
     }
 
     function updateVariables() {
@@ -312,12 +326,57 @@
             changeMaterialColor();
 
             if(INTERSECTED.object.name != undefined) {
-                log(INTERSECTED.object.name);
+                showBoneInfo(INTERSECTED.object.name);
             }
         } else {
             INTERSECTED = null;
         }
     }
+
+    // INFO FUNCTIONS
+
+    function showBoneInfo(name) {
+        var info = _findBoneInfoFromName(name);
+
+        updateBoneInfo(info);
+
+        log(name);
+    }
+
+    function _findBoneInfoFromName(name) {
+        var data = _this.options.bones;
+        var bone = null;
+        name = name.toLowerCase();
+
+        for(var i = 0, length = data.length; i < length; i++) {
+            var dataName = data[i].image.split('.png');
+            if(name == dataName[0]) {
+                bone = data[i];
+
+                break;
+            }
+        }
+
+        return bone;
+    }
+
+    function updateBoneInfo(data) {
+        if(data == null) {
+            // single bone
+            data = _this.options.bones[0];
+        } else {
+            // full skelet
+            var $btn = $(_this.options.containers.boneMoreBtnId);
+            var link = $btn.attr('data-href') + '/' + data.id;
+            $btn.attr('href', link);
+        }
+
+        $(_this.options.containers.boneTitleId).html(data.name);
+        $(_this.options.containers.boneLatinId).html(data.latin);
+        $(_this.options.containers.boneDescId).html(data.description);
+    }
+
+    // DEBUG FUNCTIONS
 
     function toString(point) {
         return point.x + " " + point.y + " " + point.z;

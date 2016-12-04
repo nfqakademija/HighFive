@@ -2,26 +2,42 @@
 
 {% block title %}3D - {{ parent() }}{% endblock %}
 
-{% block container %}
-    <div id="preloader">
-        <div id="preloader-ele" class="ball-scale-ripple-multiple">
-            <div></div>
-            <div></div>
-            <div></div>
+{% block body %}
+    <div class="row">
+        <hr class="separator">
+        <div class="col-md-12">
+            <div class="description">
+                <h1><b>3D režimas</b></h1>
+                <div class="clearfix"></div>
+                <hr>
+                <p> 3D režime galite peržiūrėti kaulus, juos vartaliodami... Paspauskite ant kaulo, kad pamatytumėte detalesnę informaciją.</p>
+            </div>
+            <hr class="separator">
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <div id="ThreeJs" class="three-container"></div>
+        <div class="col-sm-6 col-md-6">
+            <div id="ThreeJs" class="three-container">
+                <div id="preloader">
+                    <div id="preloader-ele" class="ball-scale-ripple-multiple">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-sm-6 col-md-6">
             <div class="description">
-                <h1><b>Kaulo pavadinimas</b></h1>
+                <h1 id="bone-title"><b>Skeletas</b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p> Info apie kaula...</p>
+                <p id="bone-latin"><b>Lotyniškai:</b> <span>Sceletus</span></p>
+                {#<p id="bone-type"><b>Tipas:</b> <span></span></p>#}
+                <p id="bone-description"><b>Aprašymas:</b> <span>Griaučiai, skeletas – kūno struktūrinis pagrindas, atliekantis atraminę ir apsauginę funkcijas ir kartu su raumenimis sudarantis ertmes, kuriose išsidėstę gyvybiškai svarbūs organai. </span></p>
+                <a id="bone-more-btn" class="btn btn-main pull-right" href="#" data-href="{{ path('bonepage') }}">Plačiau</a>
             </div>
         </div>
     </div>
@@ -34,5 +50,8 @@
         var bonesModelsBaseDir = "{{ asset('/models/') }}";
 
         var boneModelName = "full-skelet";
+
+        // TEMP
+        var boneJsonDir = "{{ asset('js/bones.json') }}";
     </script>
 {% endblock %}
