@@ -2,11 +2,6 @@
     var _this = this;
 
     /**
-     * @TODO: clean up the code
-     * @TODO: add comments
-     */
-
-    /**
      * @Constructor
      */
     _this.skeletOnThreeD = function () {
@@ -15,7 +10,8 @@
             id: 'ThreeJs',
             path: '/models/',
             model: 'full-skelet',
-            preloaderId: 'preloader'
+            preloaderId: 'preloader',
+            debug: true
         }
 
         // Create options by extending defaults with the passed in arguments
@@ -45,23 +41,25 @@
     }
 
     // standard global variables
-    var container, scene, camera, renderer, controls, stats;
+    var container, scene, camera, renderer, controls;
 
-    // custom global variables
+    // intersection global variables
     var targetList = [];
     var projector, mouse = { x: 0, y: 0 }, INTERSECTED;
+    var vector, raycaster;
 
-    // standard global variables
+    // camera global variables
     var width = window.innerWidth,
         height = window.innerHeight,
         pixelRation = window.devicePixelRatio,
         viewAngle = 75,
         aspectRatio = width / height,
         near = 0.1,
-        far = 1000;
+        far = 10000;
 
     /**
      * @Public
+     * Initialize the library
      */
     skeletOnThreeD.prototype.init = function() {
         updateVariables();
@@ -73,6 +71,7 @@
 
     /**
      * @Private
+     * Animation per frame
      */
     function animate() {
         requestAnimationFrame( animate );
@@ -82,10 +81,9 @@
 
     /**
      * @Private
+     * Render objects into canvas
      */
     function render() {
-        // camera.lookAt( scene.position );
-
         renderer.render( scene, camera );
 
         controls.update();
@@ -93,6 +91,7 @@
 
     /**
      * @Private
+     * Initialize everything
      */
     function init() {
         // SCENE
@@ -125,9 +124,14 @@
         // PROJECTOR
         _initProjector();
 
+        // RAYCASTER
+        _initRaycaster();
+
         // EVENTS
         _initEvents();
     }
+
+    // INIT FUNCTIONS
 
     function _initScene() {
         scene = new THREE.Scene();
@@ -176,7 +180,6 @@
                     }
                 });
 
-                object.position.y = 5;
                 addToScene( object );
 
             }, onProgress, onError );
@@ -191,7 +194,7 @@
     function _initRenderer() {
         // DETECTOR
         if (Detector.webgl) {
-            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         } else {
             renderer = new THREE.CanvasRenderer();
         }
@@ -203,15 +206,23 @@
 
     function _initControls() {
         controls = new THREE.OrbitControls( camera, renderer.domElement );
-        controls.enableDamping = false;
+        controls.enableDamping = true;
         controls.dampingFactor = 0.25;
         controls.enableZoom = true;
-        controls.autoRotate = true;
+        controls.autoRotate = false;
     }
 
     function _initProjector() {
         // initialize object to perform world/screen calculations
         projector = new THREE.Projector();
+    }
+
+    function _initRaycaster() {
+        // create a Raycaster with origin at the mouse position
+        //   and direction into the scene (camera direction)
+
+        vector = new THREE.Vector3();
+        raycaster = new THREE.Raycaster();
     }
 
     function _initEvents() {
@@ -221,6 +232,8 @@
         // on mouse click
         document.addEventListener( 'mousedown', onDocumentMouseDown, false );
     }
+
+    // RANDOM FUNCTIONS
 
     function addToScene(param) {
         scene.add(param);
@@ -251,6 +264,8 @@
         aspectRatio = width / height;
     }
 
+    // LISTENER FUNCTIONS
+
     function onWindowResize() {
         updateVariables();
 
@@ -263,41 +278,44 @@
     function onDocumentMouseDown( event ) {
         // the following line would stop any other event handler from firing
         // (such as the mouse's TrackballControls)
-        // event.preventDefault();
+        event.preventDefault();
 
         updateVariables();
 
         // update the mouse variable
-        mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-        mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+        var rect = container.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = - ((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        // update raycaster
+        vector.set( mouse.x, mouse.y, 0.5 );
+        vector.unproject( camera );
+        raycaster.set( camera.position, vector.sub( camera.position ).normalize() );
+
+        // required, since you haven't rendered yet
+        scene.updateMatrixWorld();
 
         // find intersections
         onIntersect();
     }
 
     function onIntersect() {
-        // create a Ray with origin at the mouse position
-        //   and direction into the scene (camera direction)
-        var vector = new THREE.Vector3( mouse.x, mouse.y, 1 );
-        vector.unproject( camera );
-        var ray = new THREE.Raycaster( camera.position, vector.sub( camera.position ).normalize() );
-
         // create an array containing all objects in the scene with which the ray intersects
-        var intersects = ray.intersectObjects( targetList, true );
+        var intersects = raycaster.intersectObjects( targetList, true );
 
         // if there is one (or more) intersections
         if ( intersects.length > 0 ) {
-            console.log("Hit @ " + toString( intersects[0].point ) );
+            INTERSECTED = intersects[0];
 
-            intersects[ 0 ].object.geometry.colorsNeedUpdate = true;
-            if(intersects[ 0 ].object.material.color != undefined) {
-                // change the color of the closest face.
-                intersects[ 0 ].object.material.color.setHex(Math.random() * 0xffffff);
-            }
+            log("Hit @ " + toString( INTERSECTED.point ) );
 
-            if(intersects[ 0 ].object.name != undefined) {
-                log(intersects[ 0 ].object.name);
+            changeMaterialColor();
+
+            if(INTERSECTED.object.name != undefined) {
+                log(INTERSECTED.object.name);
             }
+        } else {
+            INTERSECTED = null;
         }
     }
 
@@ -305,7 +323,19 @@
         return point.x + " " + point.y + " " + point.z;
     }
 
+    function changeMaterialColor() {
+        if(_this.options.debug) {
+            INTERSECTED.object.geometry.colorsNeedUpdate = true;
+            if (INTERSECTED.object.material.color != undefined) {
+                // change the color of the closest face.
+                INTERSECTED.object.material.color.setHex(Math.random() * 0xffffff);
+            }
+        }
+    }
+
     function log(v) {
-        console.log(v);
+        if(_this.options.debug) {
+            console.log(v);
+        }
     }
 })();

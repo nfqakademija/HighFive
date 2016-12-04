@@ -3,29 +3,25 @@
 {% block title %}3D - {{ parent() }}{% endblock %}
 
 {% block container %}
-    <div class="container no-padding">
-        <div id="preloader">
-            <div id="preloader-ele" class="ball-scale-ripple-multiple">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+    <div id="preloader">
+        <div id="preloader-ele" class="ball-scale-ripple-multiple">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div id="ThreeJs" class="three-container half-size"></div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div id="ThreeJs" class="three-container half-size">
-
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="description">
-                    <h1><b>Kaulo pavadinimas</b></h1>
-                    <div class="clearfix"></div>
-                    <hr>
-                    <p> Info apie kaula...</p>
-                </div>
+        <div class="col-md-6">
+            <div class="description">
+                <h1><b>Kaulo pavadinimas</b></h1>
+                <div class="clearfix"></div>
+                <hr>
+                <p> Info apie kaula...</p>
             </div>
         </div>
     </div>
