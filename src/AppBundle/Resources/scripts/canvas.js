@@ -1,9 +1,7 @@
-(function() {
-    /**
-     * global: skeletOnGame
-     * global: fabric
-     * */
+/** global: skeletOnGame */
+/** global: fabric */
 
+(function() {
     var _this = this;
     var _game = null;
 

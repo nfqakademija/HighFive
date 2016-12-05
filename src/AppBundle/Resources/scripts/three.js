@@ -1,10 +1,8 @@
-(function() {
-    /**
-     * global: skeletOnThreeD
-     * global: THREE
-     * global: Detector
-     * */
+/** global: skeletOnThreeD */
+/** global: THREE */
+/** global: Detector */
 
+(function() {
     var _this = this;
 
     /**
