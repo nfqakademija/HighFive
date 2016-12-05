@@ -1,3 +1,12 @@
+/** global: boneJsonDir */
+/** global: bonesImagesBaseDir */
+/** global: bonesModelsBaseDir */
+/** global: boneModelName */
+/** global: boneId */
+/** global: canvasType */
+/** global: skeletOnGame */
+/** global: skeletOnThreeD */
+
 $(document).ready(function () {
     if(typeof bonesJsonDir !== 'undefined' && typeof bonesImagesBaseDir !== 'undefined') {
         $.getJSON(bonesJsonDir, loadGame);
