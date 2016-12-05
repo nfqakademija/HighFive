@@ -1,12 +1,15 @@
-$(document).ready(function () {
-    /**
-     * global: boneJsonDir
-     * global: bonesImagesBaseDir
-     * global: bonesModelsBaseDir
-     * global: boneModelName
-     * global: boneId
-     * */
+/**
+ * global: boneJsonDir
+ * global: bonesImagesBaseDir
+ * global: bonesModelsBaseDir
+ * global: boneModelName
+ * global: boneId
+ * global: skeletOnGame
+ * global: skeletOnThreeD
+ * global: canvasType
+ * */
 
+$(document).ready(function () {
     if(typeof bonesJsonDir !== 'undefined' && typeof bonesImagesBaseDir !== 'undefined') {
         $.getJSON(bonesJsonDir, loadGame);
     }

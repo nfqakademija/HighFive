@@ -1,4 +1,10 @@
 (function() {
+    /**
+     * global: skeletOnThreeD
+     * global: THREE
+     * global: Detector
+     * */
+
     var _this = this;
 
     /**
@@ -53,7 +59,7 @@
 
     // intersection global variables
     var targetList = [];
-    var projector, mouse = { x: 0, y: 0 }, INTERSECTED;
+    var mouse = { x: 0, y: 0 }, INTERSECTED;
     var vector, raycaster;
 
     // camera global variables
@@ -133,9 +139,6 @@
         // CONTROLS
         _initControls();
 
-        // PROJECTOR
-        _initProjector();
-
         // RAYCASTER
         _initRaycaster();
 
@@ -162,7 +165,7 @@
                 var percentComplete = xhr.loaded / xhr.total * 100;
                 var percent = Math.round(percentComplete, 2);
 
-                console.log( percent + '% downloaded' );
+                log( percent + '% downloaded' );
 
                 if(percent == 100) {
                     hidePreloader();
@@ -170,7 +173,9 @@
             }
         };
 
-        var onError = function ( xhr ) { };
+        var onError = function ( xhr ) {
+            log(xhr);
+        };
 
         THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
@@ -222,11 +227,6 @@
         controls.dampingFactor = 0.25;
         controls.enableZoom = true;
         controls.autoRotate = false;
-    }
-
-    function _initProjector() {
-        // initialize object to perform world/screen calculations
-        projector = new THREE.Projector();
     }
 
     function _initRaycaster() {

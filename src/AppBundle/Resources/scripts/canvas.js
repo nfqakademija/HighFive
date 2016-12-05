@@ -1,4 +1,9 @@
 (function() {
+    /**
+     * global: skeletOnGame
+     * global: fabric
+     * */
+
     var _this = this;
     var _game = null;
 
@@ -364,8 +369,6 @@
 
     function onObjectMove(e) {
         e.target.setCoords();
-
-        var grid = _this.options.grid;
 
         _this.canvas.forEachObject(function(obj){
             if(obj.get('gridColumnId') != null) {
