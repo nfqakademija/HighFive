@@ -1,5 +1,6 @@
 /** global: boneJsonDir */
 /** global: bonesJsonDir */
+/** global: levelsJsonDir */
 /** global: bonesImagesBaseDir */
 /** global: bonesModelsBaseDir */
 /** global: boneModelName */
@@ -9,10 +10,16 @@
 /** global: skeletOnThreeD */
 
 $(document).ready(function () {
+    // canvas
     if(typeof bonesJsonDir !== 'undefined' && typeof bonesImagesBaseDir !== 'undefined') {
-        $.getJSON(bonesJsonDir, loadGame);
+        $.getJSON(bonesJsonDir, function(bones) {
+            $.getJSON(levelsJsonDir, function(levels) {
+                loadGame(bones, levels);
+            });
+        });
     }
 
+    // 3D
     if($('#ThreeJs').length) {
         if(typeof boneModelName !== 'undefined') {
             $.getJSON(boneJsonDir, loadFullThreeDFromJson);
@@ -22,8 +29,8 @@ $(document).ready(function () {
     }
 });
 
-function loadGame(data) {
-    if(data.bones != undefined) {
+function loadGame(bonesData, levelsData) {
+    if(bonesData.bones != undefined && levelsData.levels != undefined) {
         var game = new skeletOnGame({
             canvas: {
                 id: 'canvas',
@@ -32,10 +39,10 @@ function loadGame(data) {
             },
             objects: {
                 path: bonesImagesBaseDir,
-                images: data.bones
+                images: bonesData.bones
             },
             game: {
-                levels: data.levels
+                levels: levelsData.levels
             },
             animate: (canvasType == 'learn') ? true : false,
             debug: false
