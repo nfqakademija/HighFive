@@ -13,17 +13,19 @@ class BoneRepository extends \Doctrine\ORM\EntityRepository
     public function getBones()
     {
         $query = $this->getEntityManager()->createQueryBuilder()
-            ->select('b.id',
-                     'b.name',
-                     'b.latin',
-                     'b.type',
-                     'b.description',
-                     'b.visible',
-                     'b.image',
-                     'b.xcoord',
-                     'b.ycoord',
-                     'b.topcoord',
-                     'b.leftcoord')
+            ->select(
+                'b.id',
+                'b.name',
+                'b.latin',
+                'b.type',
+                'b.description',
+                'b.visible',
+                'b.image',
+                'b.xcoord',
+                'b.ycoord',
+                'b.topcoord',
+                'b.leftcoord'
+            )
             ->from('AppBundle:Bone', 'b')
             ->getQuery();
 
@@ -38,11 +40,13 @@ class BoneRepository extends \Doctrine\ORM\EntityRepository
     {
          $query = $this->getEntityManager()
             ->createQueryBuilder()
-            ->select('b.name',
-                     'b.latin',
-                     'b.type',
-                     'b.description',
-                     'b.image')
+            ->select(
+                'b.name',
+                'b.latin',
+                'b.type',
+                'b.description',
+                'b.image'
+            )
             ->from('AppBundle:Bone', 'b')
             ->getQuery();
 
