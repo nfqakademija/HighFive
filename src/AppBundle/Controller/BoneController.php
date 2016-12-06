@@ -34,7 +34,7 @@ class BoneController extends Controller
             ->getBone($id);
 
         // temporary
-        if($bone == null) {
+        if ($bone == null) {
             $bone = [
                 'id' => $id
             ];
