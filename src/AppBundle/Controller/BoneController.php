@@ -4,13 +4,14 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Bone;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class BoneController extends Controller
 {
     /**
-     * @Route("/bones", name="bonespage")
+     * @Route("/bones")
      */
     public function allBones()
     {
@@ -22,15 +23,16 @@ class BoneController extends Controller
     }
 
     /**
-     * @Route("/bone/{id}", name="bonepage", requirements={"id" = "\d+"}, defaults={"id" = 1})
+     * @Route("/bones/{id}")
+     * @param $id
+     * @return Response
      */
-    public function getBone($id)
+    public function showAction($id)
     {
-        // get data from repository about bone from id
-        $data = [
-            'id' => $id
-        ];
+        $bone = $this->getDoctrine()
+            ->getRepository('AppBundle:Bone')
+            ->getBone($id);
 
-        return $this->render('AppBundle:Bone:index.html.twig', $data);
+        return $this->render('AppBundle:Bone:index.html.twig', ['bone' => $bone]);
     }
 }
