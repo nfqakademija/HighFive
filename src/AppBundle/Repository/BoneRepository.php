@@ -16,14 +16,40 @@ class BoneRepository extends \Doctrine\ORM\EntityRepository
             ->select(
                 'b.id',
                 'b.name',
+                'b.latin',
+                'b.type',
                 'b.description',
+                'b.visible',
                 'b.image',
                 'b.xcoord',
-                'b.ycoord'
+                'b.ycoord',
+                'b.topcoord',
+                'b.leftcoord'
             )
             ->from('AppBundle:Bone', 'b')
-            ->getQuery()
-        ;
+            ->getQuery();
+
         return $query->getArrayResult();
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getBone($id)
+    {
+         $query = $this->getEntityManager()
+            ->createQueryBuilder()
+            ->select(
+                'b.name',
+                'b.latin',
+                'b.type',
+                'b.description',
+                'b.image'
+            )
+            ->from('AppBundle:Bone', 'b')
+            ->getQuery();
+
+        return $query->getOneOrNullResult();
     }
 }

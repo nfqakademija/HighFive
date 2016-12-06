@@ -6,6 +6,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    app.path.bone_images: uploads/images/bones
     locale: lt
 
 framework:
@@ -97,9 +98,6 @@ hwi_oauth:
 #            paths:
 #                email: email
 
-parameters:
-    app.path.bone_images: uploads/images/bones
-
 easy_admin:
     entities:
         Bone:
@@ -108,27 +106,35 @@ easy_admin:
                 fields:
                     - id
                     - name
-                    - xcoord
-                    - ycoord
-                    - { property: 'image', type: 'image', base_path: app.path.bone_images }
+                    - visible
+                    - { property: 'image', type: 'image', base_path: "%app.path.bone_images%" }
             show:
                 fields:
                     - id
                     - name
+                    - latin
+                    - type
+                    - description
+                    - visible
                     - xcoord
                     - ycoord
-                    - { property: 'image', type: 'image', base_path: app.path.bone_images }
+                    - { property: 'image', type: 'image', base_path: "%app.path.bone_images%" }
             form:
                 fields:
                     - name
+                    - latin
+                    - type
                     - description
+                    - visible
                     - xcoord
                     - ycoord
-                    - { property: 'imageFile', type: 'vich_image', base_path: app.path.bone_images }
+                    - topcoord
+                    - leftcoord
+                    - { property: 'imageFile', type: 'vich_image', base_path: "%app.path.bone_images%" }
 
 vich_uploader:
     db_driver: orm
     mappings:
         bone_images:
-            uri_prefix: app.path.bone_images
-            upload_destination: app.path.bone_images
+            uri_prefix: "%app.path.bone_images%"
+            upload_destination: "%app.path.bone_images%"

@@ -34,6 +34,27 @@ class Bone
     /**
      * @var string
      *
+     * @ORM\Column(name="latin", type="string", length=255)
+     */
+    private $latin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="visible", type="boolean")
+     */
+    private $visible;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="string", length=1000)
      */
     private $description;
@@ -46,18 +67,66 @@ class Bone
     private $image;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $xcoord;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      */
     private $ycoord;
+
+    /**
+     *
+     * @ORM\Column(type="float", length=255)
+     */
+    private $topcoord;
+
+    /**
+     *
+     * @ORM\Column(type="float", length=255)
+     */
+    private $leftcoord;
+
+    /**
+     * @return mixed
+     */
+    public function getTopcoord()
+    {
+        return $this->topcoord;
+    }
+
+    /**
+     * @param mixed $topcoord
+     * @return Bone
+     */
+    public function setTopcoord($topcoord)
+    {
+        $this->topcoord = $topcoord;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLeftcoord()
+    {
+        return $this->leftcoord;
+    }
+
+    /**
+     * @param mixed $leftcoord
+     * @return Bone
+     */
+    public function setLeftcoord($leftcoord)
+    {
+        $this->leftcoord = $leftcoord;
+        return $this;
+    }
 
     /**
      * @var File
@@ -131,6 +200,68 @@ class Bone
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLatin()
+    {
+        return $this->latin;
+    }
+
+    /**
+     * @param string $latin
+     * @return Bone
+     */
+    public function setLatin($latin)
+    {
+        $this->latin = $latin;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     * @return Bone
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVisible()
+    {
+        return $this->visible;
+    }
+
+    /**
+     * @param string $visible
+     * @return Bone
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 
     /**
