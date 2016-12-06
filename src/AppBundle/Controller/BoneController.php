@@ -33,6 +33,13 @@ class BoneController extends Controller
             ->getRepository('AppBundle:Bone')
             ->getBone($id);
 
+        // temporary
+        if($bone == null) {
+            $bone = [
+                'id' => $id
+            ];
+        }
+
         return $this->render('AppBundle:Bone:index.html.twig', ['bone' => $bone]);
     }
 }

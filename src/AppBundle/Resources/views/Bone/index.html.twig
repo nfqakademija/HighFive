@@ -21,9 +21,15 @@
                 <h1 id="bone-title"><b></b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p id="bone-latin"><b>{% trans %}Latin:{% endtrans %}</b> <span>{{ bone.latin }}</span></p>
-                <p id="bone-type"><b>{% trans %}Type:{% endtrans %}</b> <span>{{ bone.type }}</span></p>
-                <p id="bone-description"><b>{% trans %}Description:{% endtrans %}</b> <span>{{ bone.description }}</span></p>
+                <p id="bone-latin">
+                    <b>{% trans %}Latin:{% endtrans %}</b> <span>{% if bone.latin is defined %}{{ bone.latin }}{% endif %}</span>
+                </p>
+                <p id="bone-type">
+                    <b>{% trans %}Type:{% endtrans %}</b> <span>{% if bone.type is defined %}{{ bone.type }}{% endif %}</span>
+                </p>
+                <p id="bone-description">
+                    <b>{% trans %}Description:{% endtrans %}</b> <span>{% if bone.description is defined %}{{ bone.description }}{% endif %}</span>
+                </p>
             </div>
         </div>
     </div>

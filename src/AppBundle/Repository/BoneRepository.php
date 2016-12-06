@@ -49,6 +49,7 @@ class BoneRepository extends \Doctrine\ORM\EntityRepository
                 'b.image'
             )
             ->from('AppBundle:Bone', 'b')
+            ->where('b.id = ' . $id)
             ->getQuery();
 
         return $query->getOneOrNullResult();
