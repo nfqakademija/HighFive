@@ -21,9 +21,9 @@
                 <h1 id="bone-title"><b></b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p id="bone-latin"><b>{% trans %}Latin:{% endtrans %}</b> <span></span></p>
-                {#<p id="bone-type"><b>{% trans %}Type:{% endtrans %}</b> <span></span></p>#}
-                <p id="bone-description"><b>{% trans %}Description:{% endtrans %}</b> <span></span></p>
+                <p id="bone-latin"><b>{% trans %}Latin:{% endtrans %}</b> <span>{{ bone.latin }}</span></p>
+                <p id="bone-type"><b>{% trans %}Type:{% endtrans %}</b> <span>{{ bone.type }}</span></p>
+                <p id="bone-description"><b>{% trans %}Description:{% endtrans %}</b> <span>{{ bone.description }}</span></p>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
     <script language="javascript">
         var bonesModelsBaseDir = "{{ asset('/models/') }}";
 
-        var boneId = {{ id }};
+        var boneId = {{ bone.id }};
 
         // TEMP
         var boneJsonDir = "{{ asset('js/bones.json') }}";

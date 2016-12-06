@@ -41,6 +41,7 @@ class BoneRepository extends \Doctrine\ORM\EntityRepository
          $query = $this->getEntityManager()
             ->createQueryBuilder()
             ->select(
+                'b.id',
                 'b.name',
                 'b.latin',
                 'b.type',

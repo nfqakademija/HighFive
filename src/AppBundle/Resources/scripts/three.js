@@ -18,6 +18,7 @@
                 preloaderId: '#preloader',
                 boneTitleId: '#bone-title > b',
                 boneLatinId: '#bone-latin > span',
+                boneTypeId: '#bone-type > span',
                 boneDescId: '#bone-description > span',
                 boneMoreBtnId: '#bone-more-btn'
             },
@@ -64,7 +65,7 @@
     var width = window.innerWidth,
         height = window.innerHeight,
         pixelRation = window.devicePixelRatio,
-        viewAngle = 75,
+        viewAngle = 85,
         aspectRatio = width / height,
         near = 0.1,
         far = 10000;
@@ -152,7 +153,12 @@
 
     function _initCamera() {
         camera = new THREE.PerspectiveCamera( viewAngle, aspectRatio, near, far );
-        camera.position.z = 40;
+
+        if(_this.options.disableClickEvents) {
+            camera.position.z = 20;
+        } else {
+            camera.position.z = 40;
+        }
 
         camera.lookAt(scene.position);
     }
@@ -194,6 +200,10 @@
                         targetList.push(child);
                     }
                 });
+
+                if(!_this.options.disableClickEvents) {
+                    object.position.y = 10;
+                }
 
                 addToScene( object );
 
@@ -365,13 +375,24 @@
         } else {
             // full skelet
             var $btn = $(_this.options.containers.boneMoreBtnId);
-            var link = $btn.attr('data-href') + '/' + data.id;
-            $btn.attr('href', link);
+
+            if ($btn.length) {
+                var link = $btn.attr('data-href') + '/' + data.id;
+                $btn.attr('href', link);
+            }
+        }
+
+        var desc = '';
+        if(_this.options.disableClickEvents) {
+            desc = data.description;
+        } else {
+            desc = data.summary;
         }
 
         $(_this.options.containers.boneTitleId).html(data.name);
         $(_this.options.containers.boneLatinId).html(data.latin);
-        $(_this.options.containers.boneDescId).html(data.description);
+        $(_this.options.containers.boneTypeId).html(data.type);
+        $(_this.options.containers.boneDescId).html(desc);
     }
 
     // DEBUG FUNCTIONS

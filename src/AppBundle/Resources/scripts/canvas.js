@@ -45,7 +45,8 @@
             },
             modal: {
                 modalId: "#levelModal",
-                levelId: "#gameLevel",
+                modalTitle: "#modalTitle",
+                modalDescription: "#modalDescription",
                 restartButtonId: "#restartGame",
                 nextLevelButtonId: "#nextGameLevel"
             },
@@ -242,7 +243,7 @@
             img.finalAngle = obj.coordinates.angle;
 
             img.name = obj.name;
-            img.description = obj.description;
+            img.description = obj.summary;
 
             img.scale(_this.options.objects.scale);
 
@@ -511,11 +512,11 @@
         _removeObjectsFromCompleteList();
 
         if(isNextLevel()) {
-            levelUp();
+            showModal(_game.currentLevel, false);
 
-            showModal((_game.level - 1), false);
+            levelUp();
         } else {
-            showModal(_game.level, true);
+            showModal(_game.currentLevel, true);
         }
     }
 
@@ -555,7 +556,7 @@
     /** ========== Modal ========== **/
 
 
-    function showModal(level, completed) {
+    function showModal(currentLevel, completed) {
         if(completed) {
             // completed
             $(_this.options.modal.restartButtonId).show();
@@ -566,7 +567,8 @@
             $(_this.options.modal.nextLevelButtonId).show();
         }
 
-        $(_this.options.modal.levelId).text((level));
+        $(_this.options.modal.modalTitle).text(currentLevel.level + " " + currentLevel.name);
+        $(_this.options.modal.modalDescription).text(currentLevel.description);
 
         $(_this.options.modal.modalId).modal({
             keyboard: false,
