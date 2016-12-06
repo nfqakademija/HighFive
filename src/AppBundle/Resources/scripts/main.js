@@ -1,3 +1,5 @@
+/** global: bonesJsonDir */
+
 $(document).ready(function () {
     if(typeof bonesJsonDir !== 'undefined' && typeof bonesImagesBaseDir !== 'undefined') {
         $.getJSON(bonesJsonDir, loadGame);

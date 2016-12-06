@@ -60,7 +60,7 @@
     var width = window.innerWidth,
         height = window.innerHeight,
         pixelRation = window.devicePixelRatio,
-        viewAngle = 75,
+        viewAngle = 85,
         aspectRatio = width / height,
         near = 0.1,
         far = 10000;
@@ -151,7 +151,12 @@
 
     function _initCamera() {
         camera = new THREE.PerspectiveCamera( viewAngle, aspectRatio, near, far );
-        camera.position.z = 40;
+
+        if(_this.options.disableClickEvents) {
+            camera.position.z = 20;
+        } else {
+            camera.position.z = 40;
+        }
 
         camera.lookAt(scene.position);
     }
@@ -191,6 +196,10 @@
                         targetList.push(child);
                     }
                 });
+
+                if(!_this.options.disableClickEvents) {
+                    object.position.y = 10;
+                }
 
                 addToScene( object );
 
