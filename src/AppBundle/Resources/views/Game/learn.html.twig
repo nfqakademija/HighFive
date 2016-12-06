@@ -1,16 +1,16 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Learn - {{ parent() }}{% endblock %}
+{% block title %}{% trans %}Learn{% endtrans %} - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <hr class="separator">
         <div class="col-md-12">
             <div class="description">
-                <h1><b>Mokymosi režimas</b></h1>
+                <h1><b>{% trans %}Learning mode{% endtrans %}</b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p> Mokymosi režime galite paspausti ant norimo kaulo, ir matyti trumpą jo aprašymą. </p>
+                <p>{% trans %}In the learning mode you can click on the desired bone and see a brief description.{% endtrans %}</p>
             </div>
             <hr class="separator">
         </div>
@@ -20,8 +20,9 @@
         <canvas id="canvas" width="100%" height="500"></canvas>
 
         <div id="popover" class="popover">
-            <div class="title"></div>
+            <div class="title text-center"></div>
             <div class="description"></div>
+            <a href="#" data-href="{{ path('bonepage') }}" class="btn-more btn-link pull-right">{% trans %}More{% endtrans %}</a>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,39 @@
+<div class="row">
+    <hr class="separator">
+
+    <div class="col-md-12">
+        <div class="description">
+            <h1><b>{% trans %}Introduction{% endtrans %}</b></h1>
+            <div class="clearfix"></div>
+            <hr>
+            <p>{% trans %}Here you can see the project "SkeletOn" which was developed by team "HighFive" during NFQ Academy. This project has three environments: learning, knowledge testing, and even 3D mode, where you can see the human skeleton from all sides, find out bone names, descriptions.{% endtrans %}</p>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <ul class="list-inline portfolio-intro">
+            <li class="thumbnail">
+                <a href="{{ path('learnpage') }}">
+                    <img src="{{ asset('images/grid/learn.jpg') }}" alt="porfolio-work-image" class="img-responsive">
+                    <h3>{% trans %}Learn{% endtrans %}</h3>
+                </a>
+            </li>
+
+            <li class="thumbnail">
+                <a href="{{ path('gamepage') }}">
+                    <img src="{{ asset('images/grid/play.jpg') }}" alt="porfolio-work-image" class="img-responsive">
+                    <h3>{% trans %}Test Your Knowledge{% endtrans %}</h3>
+                </a>
+            </li>
+
+            <li class="thumbnail">
+                <a href="{{ path('threepage') }}">
+                    <img src="{{ asset('images/grid/discover.jpg') }}" alt="porfolio-work-image" class="img-responsive">
+                    <h3>{% trans %}Discover 3D{% endtrans %}</h3>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <hr class="separator">
+</div>

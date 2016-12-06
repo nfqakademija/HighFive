@@ -1,16 +1,16 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Test - {{ parent() }}{% endblock %}
+{% block title %}{% trans %}Game{% endtrans %} - {{ parent() }}{% endblock %}
 
 {% block body %}
     <div class="row">
         <hr class="separator">
         <div class="col-md-12">
             <div class="description">
-                <h1><b>Žaidimo režimas</b></h1>
+                <h1><b>{% trans %}Game mode{% endtrans %}</b></h1>
                 <div class="clearfix"></div>
                 <hr>
-                <p> Žaidimo režime galite sudėlioti kaulus į jų atitinkamas vietas. </p>
+                <p>{% trans %}In the game mode you can arrange the bones in their respective places.{% endtrans %}</p>
             </div>
             <hr class="separator">
         </div>
@@ -18,6 +18,24 @@
 
     <div class="canvas-container">
         <canvas id="canvas" width="100%" height="500"></canvas>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="levelModal" tabindex="-1" role="dialog" aria-labelledby="levelModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel"><span id="gameLevel">1</span> {% trans %}level is completed{% endtrans %}</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalText">{% trans %}You've assembled successfully skeleton.{% endtrans %}</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="restartGame" type="button" class="btn btn-default" data-dismiss="modal">{% trans %}Restart{% endtrans %}</button>
+                    <button id="nextGameLevel" type="button" class="btn btn-primary" data-dismiss="modal">{% trans %}Next level{% endtrans %}</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

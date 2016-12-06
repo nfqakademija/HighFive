@@ -1,10 +1,9 @@
+/** global: skeletOnGame */
+/** global: fabric */
+
 (function() {
     var _this = this;
-
-    /**
-     * @TODO: clean up the code
-     * @TODO: add comments
-     */
+    var _game = null;
 
     /**
      * @Constructor
@@ -12,11 +11,6 @@
     _this.skeletOnGame = function() {
         // Create global element references
         _this.canvas = null;
-        _this.grid = null;
-
-        // _this.game = null;
-        // _this.gameStarted = false;
-        // _this.gameEnded = false;
 
         // Define option defaults
         var defaults = {
@@ -40,14 +34,35 @@
                 scale: 0.2,
                 test: null
             },
-            debug: false,
+            popover: {
+                id: "#popover"
+            },
+            game: {
+                started: true,
+                levels: null,
+                currentLevel: null,
+                level: 1
+            },
+            modal: {
+                modalId: "#levelModal",
+                levelId: "#gameLevel",
+                restartButtonId: "#restartGame",
+                nextLevelButtonId: "#nextGameLevel"
+            },
+            debug: true,
             animate: false
         }
 
         // Create options by extending defaults with the passed in arguments
         if (arguments[0] && typeof arguments[0] === "object") {
             _this.options = extendDefaults(defaults, arguments[0]);
+        } else {
+            _this.options = defaults;
         }
+
+        _game = _this.options.game;
+
+        _setCurrentLevel();
     }
 
     /**
@@ -82,6 +97,19 @@
     /**
      * @Private
      */
+    function reinit(reset) {
+        if(reset != undefined && reset == true) {
+            resetLevel();
+        }
+
+        removeCanvasObjects.call(_this);
+
+        drawCanvasObjects.call(_this);
+    }
+
+    /**
+     * @Private
+     */
     function initializeGame() {
         initCanvas.call(_this);
 
@@ -96,9 +124,17 @@
      * @Private
      */
     function initializeEvents() {
-        // if (_this.game) {
-        //     _this.game.addEventListener('click', _this.close.bind(_this));
-        // }
+        $(_this.options.modal.nextLevelButtonId).on('click', function() {
+            hideModal();
+            _cleanGrid();
+            reinit(false);
+        });
+
+        $(_this.options.modal.restartButtonId).on('click', function() {
+            hideModal();
+            _cleanGrid();
+            reinit(true);
+        });
     }
 
     /**
@@ -154,7 +190,7 @@
             fill: '#fff',
             angle: 0,
             padding: 0,
-            stroke: '#ccc',
+            stroke: '#fff',
             selectable: false,
             hoverCursor: 'default'
         });
@@ -162,18 +198,12 @@
         return rect;
     }
 
-    /**
-     * @private
-     */
     function drawCanvasObjects() {
         for (var i = 0, len = _this.options.objects.images.length; i < len; i++) {
             _drawCanvasObject(_this.options.objects.path, _this.options.objects.images[i]);
         }
     }
 
-    /**
-     * @private
-     */
     function _drawCanvasObject(path, obj) {
         fabric.Image.fromURL(path + obj.image, function (img) {
             var grid = _this.options.grid;
@@ -220,7 +250,7 @@
 
             _this.canvas.renderAll();
 
-            if(obj.id == 1 || _this.options.animate) {
+            if(checkIfNeedAnimate(obj.id)) {
                 animateObjectInPlace(img, 2000);
             }
         });
@@ -338,8 +368,6 @@
     function onObjectMove(e) {
         e.target.setCoords();
 
-        var grid = _this.options.grid;
-
         _this.canvas.forEachObject(function(obj){
             if(obj.get('gridColumnId') != null) {
                 obj.setCoords();
@@ -373,6 +401,8 @@
 
                         animateObjectInPlace(e.target);
 
+                        _addObjectToCompletedList(e.target.imageId);
+
                         inPlace = true;
                     } else {
                         obj.set('fill', '#fff');
@@ -385,6 +415,8 @@
 
         if(inPlace == false) {
             shakeObject(e.target, 1, 4);
+        } else if(_checkIfAllObjectsInPlace()) {
+            completeLevel();
         }
     }
 
@@ -394,35 +426,161 @@
 
             if (e.target) {
                 if (e.target.disableMoving == true) {
-                    showObjectInformation(e.target);
+                    showObjectInformation(e);
                 }
             }
         }
     }
 
-    function showObjectInformation(obj) {
-        var pointer = _this.canvas.getPointer(obj.e);
 
-        showPopover(obj.name, obj.description, pointer);
+    /** ========== Popover ========== **/
+
+
+    function showObjectInformation(e) {
+        var pointer = _this.canvas.getPointer(e.e);
+        var obj = e.target;
+
+        showPopover(obj.imageId, obj.name, obj.description, pointer);
     }
 
-    function showPopover(title, desc, pointer) {
-        var $popover = $('#popover');
+    function showPopover(id, title, desc, pointer) {
+        var $popover = $(_this.options.popover.id);
+        var $btn = $popover.find('.btn-more');
+        var link = $btn.attr('data-href') + '/' + id;
 
         $popover.find('.title').html(title);
         $popover.find('.description').html(desc);
+        $btn.attr('href', link);
 
         $popover.css({'left': pointer.x, 'top': pointer.y});
         $popover.show();
     }
 
     function hidePopover() {
-        var $popover = $('#popover');
+        var $popover = $(_this.options.popover.id);
 
         $popover.hide();
     }
 
+
+    /** ========== GAME LEVELS ========== **/
+
+
+    function removeCanvasObjects() {
+        var remove = [];
+
+        _this.canvas.forEachObject(function(obj){
+            if(obj != undefined && obj.get('imageId') != null) {
+                remove.push(obj);
+            }
+        });
+
+        for(var i = 0, length = remove.length; i < length; i++) {
+            _this.canvas.remove(remove[i]);
+        }
+    }
+
+    function checkIfNeedAnimate(id) {
+        if(_this.options.animate) {
+            return true;
+        } else if(_game.currentLevel.animateObjects.indexOf(id) > -1) {
+            _addObjectToCompletedList(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function _addObjectToCompletedList(id) {
+        _game.currentLevel.objectsInPlace.push(id);
+    }
+
+    function _removeObjectsFromCompleteList() {
+        _game.currentLevel.objectsInPlace = [];
+    }
+
+    function _checkIfAllObjectsInPlace() {
+        if(_game.currentLevel.objectsInPlace.length == _this.options.objects.images.length) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function completeLevel() {
+        _removeObjectsFromCompleteList();
+
+        if(isNextLevel()) {
+            levelUp();
+
+            showModal((_game.level - 1), false);
+        } else {
+            showModal(_game.level, true);
+        }
+    }
+
+    function isNextLevel() {
+        if(_game.levels[_game.level] != undefined) {
+            return true;
+        }
+
+        return false;
+    }
+
+    function levelUp() {
+        _game.level++;
+
+        _setCurrentLevel();
+    }
+
+    function resetLevel() {
+        _game.level = 1;
+
+        _setCurrentLevel();
+    }
+
+    function _setCurrentLevel() {
+        _game.currentLevel = _game.levels[_game.level - 1];
+    }
+
+    function _cleanGrid() {
+        _this.canvas.forEachObject(function(obj){
+            if(obj.get('gridColumnId') != null) {
+                obj.set('fill', '#fff');
+            }
+        });
+    }
+
+
+    /** ========== Modal ========== **/
+
+
+    function showModal(level, completed) {
+        if(completed) {
+            // completed
+            $(_this.options.modal.restartButtonId).show();
+            $(_this.options.modal.nextLevelButtonId).hide();
+        } else {
+            // next level
+            $(_this.options.modal.restartButtonId).hide();
+            $(_this.options.modal.nextLevelButtonId).show();
+        }
+
+        $(_this.options.modal.levelId).text((level));
+
+        $(_this.options.modal.modalId).modal({
+            keyboard: false,
+            backdrop: 'static'
+        });
+    }
+
+    function hideModal() {
+        // $(_this.options.modal.modalId).modal('hide');
+    }
+
     function log(v) {
-        console.log(v);
+        if(_this.options.debug) {
+            console.log(v);
+        }
     }
 })();

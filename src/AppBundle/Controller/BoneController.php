@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Bone;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-
 class BoneController extends Controller
 {
     /**

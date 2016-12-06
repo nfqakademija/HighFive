@@ -39,9 +39,9 @@ class OAuthUserProvider extends BaseClass
             //then set its corresponding social id
             $service = $response->getResourceOwner()->getName();
             switch ($service) {
-                case 'google':
-                    $user->setGoogleID($socialID);
-                    break;
+//                case 'google':
+//                    $user->setGoogleID($socialID);
+//                    break;
                 case 'facebook':
                     $user->setFacebookID($socialID);
                     break;

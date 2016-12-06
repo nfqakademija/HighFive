@@ -1,13 +1,14 @@
-<div id="top-carousel" class="carousel slide fullscreen-carousel" data-ride="carousel"> <!-- Wrapper for slides -->
+<div id="top-carousel" class="carousel slide fullscreen-carousel" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         <div class="item component active" data-bg="{{ asset('images/slides/slide_1.jpg') }}"
              style="background-image: url({{ asset('images/slides/slide_1.jpg') }});">
             <div class="container">
                 <div class="row">
                     <div class="carousel-caption text-capitalize">
-                        <h1><b>Simple &amp; fun</b> <br> <span>SkeletOn Game</span></h1>
-                        <a href="{{ path('learnpage') }}" class="btn btn-main">Learn</a>
-                        <a href="{{ path('gamepage') }}" class="btn btn-main">Test Your Knowledge</a>
+                        <h1><b>{% trans %}Simple & fun{% endtrans %}</b> <br> <span>SkeletOn {% trans %}Game{% endtrans %}</span></h1>
+                        <a href="{{ path('learnpage') }}" class="btn btn-main">{% trans %}Learn{% endtrans %}</a>
+                        <a href="{{ path('gamepage') }}" class="btn btn-main">{% trans %}Test Your Knowledge{% endtrans %}</a>
+                        <a href="{{ path('threepage') }}" class="btn btn-main">{% trans %}Discover 3D{% endtrans %}</a>
                     </div>
                 </div>
             </div>

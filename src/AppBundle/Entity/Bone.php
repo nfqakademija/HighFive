@@ -304,5 +304,4 @@ class Bone
             $this->updatedAt = new \DateTime('now');
         }
     }
-
 }

@@ -1,0 +1,57 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{% trans %}Discover 3D{% endtrans %} - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <hr class="separator">
+        <div class="col-md-12">
+            <div class="description">
+                <h1><b>{% trans %}3D mode{% endtrans %}</b></h1>
+                <div class="clearfix"></div>
+                <hr>
+                <p>{% trans %}In the 3D mode you can rotate rotate models and when clicked on them, see short info.{% endtrans %}</p>
+            </div>
+            <hr class="separator">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6">
+            <div id="ThreeJs" class="three-container">
+                <div id="preloader">
+                    <div id="preloader-ele" class="ball-scale-ripple-multiple">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6">
+            <div class="description">
+                <h1 id="bone-title"><b>{% trans %}Skelet{% endtrans %}</b></h1>
+                <div class="clearfix"></div>
+                <hr>
+                <p id="bone-latin"><b>{% trans %}Latin:{% endtrans %}</b> <span>{% trans %}Sceletus{% endtrans %}</span></p>
+                {#<p id="bone-type"><b>{% trans %}Type:{% endtrans %}</b> <span></span></p>#}
+                <p id="bone-description"><b>{% trans %}Description:{% endtrans %}</b> <span>{% trans %}Skeleton - body structural framework for carrying out the supporting and protective functions and together with the muscles forming cavities where vital organs are located.{% endtrans %}</span></p>
+                <a id="bone-more-btn" class="btn btn-main pull-right" href="#" data-href="{{ path('bonepage') }}">{% trans %}More{% endtrans %}</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script language="javascript">
+        var bonesModelsBaseDir = "{{ asset('/models/') }}";
+
+        var boneModelName = "full-skelet";
+
+        // TEMP
+        var boneJsonDir = "{{ asset('js/bones.json') }}";
+    </script>
+{% endblock %}

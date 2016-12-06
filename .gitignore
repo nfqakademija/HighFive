@@ -17,6 +17,7 @@
 /web/js
 /web/fonts
 /web/images
+/web/models
 /web/uploads/
 /node_modules
 /bin/*

@@ -20,7 +20,8 @@ class GameController extends Controller
     /**
      * @Route("/learn", name="learnpage")
      */
-    public function gameAction() {
+    public function gameAction()
+    {
         $data = ['type' => 'learn'];
 
         return $this->render('AppBundle:Game:learn.html.twig', $data);
