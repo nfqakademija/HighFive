@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class BoneController extends Controller
 {
     /**
-     * @Route("/bones")
+     * @Route("/bones", name="bonespage")
      */
-    public function allBones()
+    public function getAllBones()
     {
         $bones = $this->getDoctrine()
             ->getRepository('AppBundle:Bone')
@@ -23,11 +23,11 @@ class BoneController extends Controller
     }
 
     /**
-     * @Route("/bones/{id}")
+     * @Route("/bone/{id}", name="bonepage", requirements={"id" = "\d+"}, defaults={"id" = 1})
      * @param $id
      * @return Response
      */
-    public function showAction($id)
+    public function getBone($id)
     {
         $bone = $this->getDoctrine()
             ->getRepository('AppBundle:Bone')
