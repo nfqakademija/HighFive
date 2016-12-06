@@ -239,7 +239,7 @@
             img.finalAngle = obj.coordinates.angle;
 
             img.name = obj.name;
-            img.description = obj.description;
+            img.description = obj.summary;
 
             img.scale(_this.options.objects.scale);
 

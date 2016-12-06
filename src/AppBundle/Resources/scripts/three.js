@@ -380,9 +380,16 @@
             $btn.attr('href', link);
         }
 
+        var desc = '';
+        if(_this.options.disableClickEvents) {
+            desc = data.description;
+        } else {
+            desc = data.summary;
+        }
+
         $(_this.options.containers.boneTitleId).html(data.name);
         $(_this.options.containers.boneLatinId).html(data.latin);
-        $(_this.options.containers.boneDescId).html(data.description);
+        $(_this.options.containers.boneDescId).html(desc);
     }
 
     // DEBUG FUNCTIONS

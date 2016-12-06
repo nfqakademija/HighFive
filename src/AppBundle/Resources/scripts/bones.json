@@ -4,6 +4,7 @@
             "id": 1,
             "name": "Kaukolė",
             "latin": "Cranium",
+            "summary": "Vieta kur gyvena smegenys.",
             "description": "Vieta kur gyvena smegenys.",
             "image": "skull.png",
             "coordinates": {
@@ -18,6 +19,7 @@
             "id": 2,
             "name": "Stuburas",
             "latin": "Dorsum",
+            "summary": "Žmogaus organizmo kertinis akmuo susidedantis iš 33 (kartais 34) slankstelių.",
             "description": "Žmogaus organizmo kertinis akmuo susidedantis iš 33 (kartais 34) slankstelių.",
             "image": "back.png",
             "coordinates": {
@@ -32,6 +34,7 @@
             "id": 3,
             "name": "Šonkauliai",
             "latin": "Costae",
+            "summary": "Saugo vidaus organus. Įdomus faktas: moterys turi dviem šonkauliais mažiau negu vyrai.",
             "description": "Saugo vidaus organus. Įdomus faktas: moterys turi dviem šonkauliais mažiau negu vyrai.",
             "image": "ribs.png",
             "coordinates": {
@@ -46,6 +49,7 @@
             "id": 4,
             "name": "Dubens kaulai",
             "latin": "Os Coxae",
+            "summary": "Vieta iš kur dygsta kojos.",
             "description": "Vieta iš kur dygsta kojos.",
             "image": "hip.png",
             "coordinates": {
@@ -60,6 +64,7 @@
             "id": 5,
             "name": "Žastikaulis",
             "latin": "Humerus",
+            "summary": "Ilgasis rankų (priekinių galūnių) kaulas, pridėtinio skeleto dalis.",
             "description": "Ilgasis rankų (priekinių galūnių) kaulas, pridėtinio skeleto dalis.",
             "image": "left-upper-arm.png",
             "coordinates": {
@@ -74,6 +79,7 @@
             "id": 6,
             "name": "Dilbis",
             "latin": "Antebrachium",
+            "summary": "Rankos dalis, esanti tarp žasto ir plaštakos. Sudaro du kaulai: alkūnkaulis ir stipinkaulis.",
             "description": "Rankos dalis, esanti tarp žasto ir plaštakos. Sudaro du kaulai: alkūnkaulis ir stipinkaulis.",
             "image": "left-lower-arm.png",
             "coordinates": {
@@ -88,6 +94,7 @@
             "id": 7,
             "name": "Plaštaka",
             "latin": "Ossa Manus",
+            "summary": "Ranka nuo riešo, delnas su pirštais. Plaštakos griaučius sudaro 27 kaulai.",
             "description": "Ranka nuo riešo, delnas su pirštais. Plaštakos griaučius sudaro 27 kaulai.",
             "image": "left-wrist.png",
             "coordinates": {
@@ -102,6 +109,7 @@
             "id": 8,
             "name": "Žastikaulis",
             "latin": "Humerus",
+            "summary": "Ilgasis rankų (priekinių galūnių) kaulas, pridėtinio skeleto dalis.",
             "description": "Ilgasis rankų (priekinių galūnių) kaulas, pridėtinio skeleto dalis.",
             "image": "right-upper-arm.png",
             "coordinates": {
@@ -116,6 +124,7 @@
             "id": 9,
             "name": "Dilbis",
             "latin": "Antebrachium",
+            "summary": "Rankos dalis, esanti tarp žasto ir plaštakos. Sudaro du kaulai: alkūnkaulis ir stipinkaulis.",
             "description": "Rankos dalis, esanti tarp žasto ir plaštakos. Sudaro du kaulai: alkūnkaulis ir stipinkaulis.",
             "image": "right-lower-arm.png",
             "coordinates": {
@@ -130,6 +139,7 @@
             "id": 10,
             "name": "Plaštaka",
             "latin": "Ossa Manus",
+            "summary": "Ranka nuo riešo, delnas su pirštais. Plaštakos griaučius sudaro 27 kaulai.",
             "description": "Ranka nuo riešo, delnas su pirštais. Plaštakos griaučius sudaro 27 kaulai.",
             "image": "right-wrist.png",
             "coordinates": {
@@ -144,6 +154,7 @@
             "id": 11,
             "name": "Šlaunikaulis",
             "latin": "Femur",
+            "summary": " Šlaunikaulis yra didžiausias iš ilgųjų kaulų.",
             "description": " Šlaunikaulis yra didžiausias iš ilgųjų kaulų.",
             "image": "left-upper-leg.png",
             "coordinates": {
@@ -158,6 +169,7 @@
             "id": 12,
             "name": "Blauzda",
             "latin": "Tibia and Fibula",
+            "summary": "Sudaro 2 kaulai: blauzdikaulis ir šeivikaulis. Blauzdikaulis yra pats stipriausias žmogaus kaulas",
             "description": "Sudaro 2 kaulai: blauzdikaulis ir šeivikaulis. Blauzdikaulis yra pats stipriausias žmogaus kaulas",
             "image": "left-lower-leg.png",
             "coordinates": {
@@ -172,6 +184,7 @@
             "id": 13,
             "name": "Pėda",
             "latin": "Ossa Pedis",
+            "summary": "Pėdos griaučiai yra sudaryti iš: 7 čiurnos kaulų, 5 padikaulių, 14 pirštakaulių.",
             "description": "Pėdos griaučiai yra sudaryti iš: 7 čiurnos kaulų, 5 padikaulių, 14 pirštakaulių.",
             "image": "left-ankle.png",
             "coordinates": {
@@ -186,6 +199,7 @@
             "id": 14,
             "name": "Šlaunikaulis",
             "latin": "Femur",
+            "summary": " Šlaunikaulis yra didžiausias iš ilgųjų kaulų.",
             "description": " Šlaunikaulis yra didžiausias iš ilgųjų kaulų.",
             "image": "right-upper-leg.png",
             "coordinates": {
@@ -200,6 +214,7 @@
             "id": 15,
             "name": "Blauzda",
             "latin": "Tibia and Fibula",
+            "summary": "Sudaro 2 kaulai: blauzdikaulis ir šeivikaulis. Blauzdikaulis yra pats stipriausias žmogaus kaulas",
             "description": "Sudaro 2 kaulai: blauzdikaulis ir šeivikaulis. Blauzdikaulis yra pats stipriausias žmogaus kaulas",
             "image": "right-lower-leg.png",
             "coordinates": {
@@ -214,6 +229,7 @@
             "id": 16,
             "name": "Pėda",
             "latin": "Ossa Pedis",
+            "summary": "Pėdos griaučiai yra sudaryti iš: 7 čiurnos kaulų, 5 padikaulių, 14 pirštakaulių.",
             "description": "Pėdos griaučiai yra sudaryti iš: 7 čiurnos kaulų, 5 padikaulių, 14 pirštakaulių.",
             "image": "right-ankle.png",
             "coordinates": {
