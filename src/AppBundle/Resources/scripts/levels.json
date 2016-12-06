@@ -2,6 +2,8 @@
     "levels": [
         {
             "level": 1,
+            "name": " galvos lygis",
+            "description": "Jūs sėkmingai sudėjote skeletą. 1",
             "animateObjects": [
                 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
             ],
@@ -9,6 +11,8 @@
         },
         {
             "level": 2,
+            "name": " stuburo lygis",
+            "description": "Jūs sėkmingai sudėjote skeletą. 2",
             "animateObjects": [
                 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
             ],
@@ -16,6 +20,8 @@
         },
         {
             "level": 3,
+            "name": " kūno lygis",
+            "description": "Jūs sėkmingai sudėjote skeletą. 3",
             "animateObjects": [
                 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
             ],
