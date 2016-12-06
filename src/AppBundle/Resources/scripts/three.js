@@ -18,6 +18,7 @@
                 preloaderId: '#preloader',
                 boneTitleId: '#bone-title > b',
                 boneLatinId: '#bone-latin > span',
+                boneTypeId: '#bone-type > span',
                 boneDescId: '#bone-description > span',
                 boneMoreBtnId: '#bone-more-btn'
             },
@@ -374,8 +375,11 @@
         } else {
             // full skelet
             var $btn = $(_this.options.containers.boneMoreBtnId);
-            var link = $btn.attr('data-href') + '/' + data.id;
-            $btn.attr('href', link);
+
+            if ($btn.length) {
+                var link = $btn.attr('data-href') + '/' + data.id;
+                $btn.attr('href', link);
+            }
         }
 
         var desc = '';
@@ -387,6 +391,7 @@
 
         $(_this.options.containers.boneTitleId).html(data.name);
         $(_this.options.containers.boneLatinId).html(data.latin);
+        $(_this.options.containers.boneTypeId).html(data.type);
         $(_this.options.containers.boneDescId).html(desc);
     }
 
