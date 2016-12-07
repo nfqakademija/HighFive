@@ -2,11 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Bone;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class BoneController extends Controller
 {
@@ -34,5 +34,18 @@ class BoneController extends Controller
             ->getBone($id);
 
         return $this->render('AppBundle:Bone:index.html.twig', ['bone' => $bone]);
+    }
+
+    /**
+     * @Route("/api/levels")
+     * @return Response
+     */
+    public function getLevels()
+    {
+        $levels = $this->getDoctrine()
+            ->getRepository('AppBundle:Level')
+            ->getLevels();
+
+        return new JsonResponse(['levels' => $levels]);
     }
 }

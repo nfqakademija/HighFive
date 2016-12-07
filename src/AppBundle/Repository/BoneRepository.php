@@ -18,6 +18,7 @@ class BoneRepository extends \Doctrine\ORM\EntityRepository
                 'b.name',
                 'b.latin',
                 'b.type',
+                'b.summary',
                 'b.description',
                 'b.visible',
                 'b.image',

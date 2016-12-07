@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -15,6 +16,18 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Bone
 {
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    private $levels;
+
+    public function __construct()
+    {
+        $this->levels = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -30,6 +43,45 @@ class Bone
      * @ORM\Column(name="name", type="string")
      */
     private $name;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="sort", type="integer")
+     */
+    private $sort;
+
+    /**
+     * @return mixed
+     */
+    public function getLevels()
+    {
+        return $this->levels;
+    }
+
+    /**
+     * @param mixed $levels
+     */
+    public function setLevels($levels)
+    {
+        $this->levels = $levels;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * @param int $sort
+     */
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
+    }
 
     /**
      * @var string
@@ -55,7 +107,14 @@ class Bone
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=1000)
+     * @ORM\Column(name="summary", type="string", length=250)
+     */
+    private $summary;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=2500)
      */
     private $description;
 
@@ -91,6 +150,22 @@ class Bone
      * @ORM\Column(type="float", length=255)
      */
     private $leftcoord;
+
+    /**
+     * @return string
+     */
+    public function getSummary()
+    {
+        return $this->summary;
+    }
+
+    /**
+     * @param string $summary
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+    }
 
     /**
      * @return mixed
@@ -265,6 +340,14 @@ class Bone
     }
 
     /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
      * @return string
      */
     public function getXcoord()
@@ -303,5 +386,29 @@ class Bone
         if ($image) {
             $this->updatedAt = new \DateTime('now');
         }
+    }
+
+    /**
+     * Add level
+     *
+     * @param \AppBundle\Entity\Level $level
+     *
+     * @return Bone
+     */
+    public function addLevel(\AppBundle\Entity\Level $level)
+    {
+        $this->levels[] = $level;
+
+        return $this;
+    }
+
+    /**
+     * Remove level
+     *
+     * @param \AppBundle\Entity\Level $level
+     */
+    public function removeLevel(\AppBundle\Entity\Level $level)
+    {
+        $this->levels->removeElement($level);
     }
 }

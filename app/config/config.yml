@@ -114,6 +114,7 @@ easy_admin:
                     - name
                     - latin
                     - type
+                    - summary
                     - description
                     - visible
                     - xcoord
@@ -124,6 +125,7 @@ easy_admin:
                     - name
                     - latin
                     - type
+                    - summary
                     - description
                     - visible
                     - xcoord
@@ -131,6 +133,8 @@ easy_admin:
                     - topcoord
                     - leftcoord
                     - { property: 'imageFile', type: 'vich_image', base_path: "%app.path.bone_images%" }
+        Level:
+            class: AppBundle\Entity\Level
 
 vich_uploader:
     db_driver: orm
